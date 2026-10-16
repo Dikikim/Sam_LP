@@ -6,16 +6,19 @@
   var COPY = D.COPY
 
   var STEP_TINTS = [
-    { bg: '#7a120d', ink: '#ffffff' },
-    { bg: '#a91c14', ink: '#ffffff' },
-    { bg: '#d92b21', ink: '#ffffff' },
-    { bg: '#f6c9c5', ink: '#0a0a0a' },
+    { bg: '#1f2148', ink: '#ffffff' },
+    { bg: '#2563eb', ink: '#ffffff' },
+    { bg: 'linear-gradient(160deg, #ffb627, #f7931e)', ink: '#1f2148' },
+    { bg: '#ffe7a8', ink: '#1f2148' },
   ]
   var PLANS = [
-    { id: 'pair', tone: 'grey', perKey: 'perPerson' },
-    { id: 'solo', tone: 'red', perKey: 'perLesson' },
-    { id: 'exam', tone: 'black', perKey: 'perLesson' },
+    { id: 'pair', featured: false, perKey: 'perPerson', icon: 'i-users', tone: 'ico-blue' },
+    { id: 'solo', featured: true, perKey: 'perLesson', icon: 'i-user', tone: '' },
+    { id: 'exam', featured: false, perKey: 'perLesson', icon: 'i-case', tone: 'ico-yellow' },
   ]
+  function icon(id, tone) {
+    return '<span class="ico ' + tone + '"><svg aria-hidden="true"><use href="#' + id + '"/></svg></span>'
+  }
 
   var state = { lang: initialLang(), goal: 'work', step: 0, pkg: 16 }
 
@@ -69,6 +72,7 @@
 
   /* ---------- Dynamic blocks ---------- */
   function renderMarquee() {
+    if (!$('marquee')) return
     var items = t().marquee
     var all = items.concat(items, items, items)
     $('marquee').innerHTML = all.map(function (m) { return '<span>' + esc(m) + '</span>' }).join('')
@@ -78,7 +82,7 @@
     var c = t()
     $('goal-chips').innerHTML = D.GOAL_IDS.map(function (id) {
       var on = id === state.goal
-      return '<button type="button" class="chip chip-dark' + (on ? ' on' : '') + '" data-goal="' + id +
+      return '<button type="button" class="chip' + (on ? ' on' : '') + '" data-goal="' + id +
         '" aria-pressed="' + on + '">' + esc(c.goal.labels[id]) + '</button>'
     }).join('')
   }
@@ -109,17 +113,17 @@
     var prices = D.PRICES[state.pkg]
     $('pkg-chips').innerHTML = D.PACKAGES.map(function (n) {
       var on = n === state.pkg
-      return '<button type="button" class="chip chip-light' + (on ? ' on' : '') + '" data-pkg="' + n +
+      return '<button type="button" class="chip' + (on ? ' on' : '') + '" data-pkg="' + n +
         '" aria-pressed="' + on + '">' + esc(c.price.counts[n]) + '</button>'
     }).join('')
     $('pkg-note').textContent = c.price.notes[state.pkg]
     $('tiles').innerHTML = PLANS.map(function (p) {
-      return '<div class="tile tile-' + p.tone + '"><div class="tile-body">' +
+      return '<div class="tile' + (p.featured ? ' tile-featured' : '') + '">' + icon(p.icon, p.tone) +
         '<h3>' + esc(c.price.names[p.id]) + '</h3>' +
         '<p class="price">' + esc(prices[p.id][0]) + '</p>' +
         '<p class="rate">' + esc(prices[p.id][1]) + ' ' + esc(c.price[p.perKey]) + '</p>' +
         '<ul>' + c.price.lines[p.id].map(function (ln) { return '<li>' + esc(ln) + '</li>' }).join('') + '</ul>' +
-        '</div><a class="tile-strip" href="#book">' + esc(c.price.choose) + ARROW + '</a></div>'
+        '<a class="tile-cta" href="#book">' + esc(c.price.choose) + ARROW + '</a></div>'
     }).join('')
   }
 
@@ -209,6 +213,18 @@
       .then(function (r) { done(r.ok) })
       .catch(function () { done(false) })
   })
+
+  // Highlight the menu link of the section in view
+  if ('IntersectionObserver' in window) {
+    var links = document.querySelectorAll('.nav-links a')
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return
+        links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id) })
+      })
+    }, { rootMargin: '-45% 0px -50% 0px' })
+    ;['how', 'about', 'prices', 'faq'].forEach(function (id) { if ($(id)) spy.observe($(id)) })
+  }
 
   $('year').textContent = new Date().getFullYear()
   renderAll()

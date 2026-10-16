@@ -10,7 +10,7 @@ const LINKS = {
   facebook: 'https://www.facebook.com/share/1JaHwCmzrp/',
 }
 
-const TRIAL_PRICE = '499 ₴'
+const TRIAL_PRICE = '499 ₴'
 
 // [package total, price per lesson]
 const PRICES = {
@@ -36,6 +36,29 @@ const COPY = {
       description: 'Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Перше заняття — 499 ₴.',
     },
     nav: { how: 'Як це працює', about: 'Про Сема', prices: 'Ціни', faq: 'Питання', cta: 'Пробне заняття' },
+    heads: {
+      hero: ['Говори англійською', 'вільно з Семом'],
+      services: ['Формати', 'занять'],
+      goal: ['Для чого тобі', 'англійська?'],
+      how: ['Як це', 'працює'],
+      about: ['Привіт, я Сем.', 'Давай говорити.'],
+      price: ['Обери свій', 'темп'],
+      faq: ['Чесні', 'питання'],
+    },
+    cards: {
+      talkTitle: '70% практики', talkText: 'часу на занятті говориш ти',
+      certTitle: 'TEFL/TESOL', certText: 'сертифікований викладач',
+    },
+    services: {
+      lead: 'Обери, як тобі зручніше вчитися: сам на сам із викладачем, у парі з другом або з фокусом на іспит чи роботу.',
+      cta: 'Записатися на пробне',
+      more: 'Дивитися ціни',
+      items: [
+        { title: 'Індивідуальні', text: 'План під твою мету й графік. Більшість часу на занятті говориш ти.' },
+        { title: 'Парні заняття', text: 'Вчися з другом чи партнером: дешевше, а говорити вдвох легше.' },
+        { title: 'Іспити та бізнес', text: 'IELTS, TOEFL, НМТ, співбесіди, презентації та листи англійською.' },
+      ],
+    },
     hero: {
       h1: 'говори англійською вільно',
       lead: 'Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Викладач із сертифікатом TEFL/TESOL.',
@@ -118,7 +141,7 @@ const COPY = {
       ],
     },
     form: {
-      h2: `перше заняття, ${TRIAL_PRICE}`,
+      h2: `Перше заняття — ${TRIAL_PRICE}`,
       lead: 'Залиш контакти, і я напишу тобі протягом дня, щоб обрати час.',
       name: 'Твоє імʼя',
       handle: 'Telegram або Instagram',
@@ -140,6 +163,29 @@ const COPY = {
       description: 'Conversational American English without the barrier, online for adults and teens. 70% of every lesson is you speaking. First lesson 499 ₴.',
     },
     nav: { how: 'How it works', about: 'About Sam', prices: 'Prices', faq: 'Questions', cta: 'Book a trial' },
+    heads: {
+      hero: ['Speak English', 'freely with Sam'],
+      services: ['Lesson', 'formats'],
+      goal: ['What do you need', 'English for?'],
+      how: ['How it', 'works'],
+      about: ["Hi, I'm Sam.", "Let's talk."],
+      price: ['Pick your', 'pace'],
+      faq: ['Fair', 'questions'],
+    },
+    cards: {
+      talkTitle: '70% practice', talkText: 'of the lesson, you do the talking',
+      certTitle: 'TEFL/TESOL', certText: 'certified teacher',
+    },
+    services: {
+      lead: 'Choose how you like to learn: one-to-one with your teacher, in a pair with a friend, or focused on an exam or your job.',
+      cta: 'Book a trial lesson',
+      more: 'See prices',
+      items: [
+        { title: 'One-to-one', text: 'A plan built around your goal and schedule. You do most of the talking.' },
+        { title: 'Pair lessons', text: 'Learn with a friend or partner: cheaper, and talking is easier with two.' },
+        { title: 'Exams & business', text: 'IELTS, TOEFL, НМТ, job interviews, presentations and emails in English.' },
+      ],
+    },
     hero: {
       h1: 'talk your way into english',
       lead: 'Conversational American English without the barrier, online for adults and teens. 70% of every lesson is you speaking. TEFL/TESOL-certified teacher.',
@@ -217,7 +263,7 @@ const COPY = {
       ],
     },
     form: {
-      h2: `your first lesson, ${TRIAL_PRICE}`,
+      h2: `Your first lesson: ${TRIAL_PRICE}`,
       lead: "Leave your details and I'll write to you within a day to pick a time.",
       name: 'Your name',
       handle: 'Telegram or Instagram',
