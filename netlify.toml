@@ -1,0 +1,9 @@
+# Plain static site: no build step, publish the folder as-is.
+[build]
+  publish = "."
+  command = "echo 'Static site - nothing to build'"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

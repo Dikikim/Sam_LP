@@ -1,6 +1,8 @@
+/* English with Sam: all page text, prices and links. Edit both ua and en. */
+(function () {
 // All page copy, prices and links live here. Edit text in both languages.
 
-export const LINKS = {
+const LINKS = {
   booking: 'https://t.me/english_sam7',
   channel: 'https://t.me/english_sam77',
   instagram: 'https://www.instagram.com/english_with_sam7/',
@@ -8,26 +10,26 @@ export const LINKS = {
   facebook: 'https://www.facebook.com/share/1JaHwCmzrp/',
 }
 
-export const TRIAL_PRICE = '499 ₴'
+const TRIAL_PRICE = '499 ₴'
 
 // [package total, price per lesson]
-export const PRICES = {
+const PRICES = {
   4: { pair: ['2 280 ₴', '570 ₴'], solo: ['2 680 ₴', '670 ₴'], exam: ['3 400 ₴', '850 ₴'] },
   8: { pair: ['4 400 ₴', '550 ₴'], solo: ['5 200 ₴', '650 ₴'], exam: ['6 480 ₴', '810 ₴'] },
   16: { pair: ['8 320 ₴', '520 ₴'], solo: ['9 920 ₴', '620 ₴'], exam: ['12 800 ₴', '800 ₴'] },
   32: { pair: ['16 000 ₴', '500 ₴'], solo: ['19 200 ₴', '600 ₴'], exam: ['24 000 ₴', '750 ₴'] },
 }
-export const PACKAGES = [4, 8, 16, 32]
+const PACKAGES = [4, 8, 16, 32]
 
-export const PHRASES = {
+const PHRASES = {
   work: ['Could we push the call to Thursday?', 'Let me walk you through the numbers.', 'Sorry, can I just add something here?'],
   travel: ['Is this seat taken?', 'Where do locals actually eat around here?', "I think there's a mistake on the bill."],
   exams: ['The graph shows a steady rise in…', 'On the one hand… on the other hand…', "To sum up, I'd argue that…"],
   life: ["I've been meaning to tell you…", "No way, that's hilarious.", 'Sorry, could you say that again?'],
 }
-export const GOAL_IDS = ['work', 'travel', 'exams', 'life']
+const GOAL_IDS = ['work', 'travel', 'exams', 'life']
 
-export const COPY = {
+const COPY = {
   ua: {
     meta: {
       title: 'English with Sam — розмовна американська англійська онлайн',
@@ -125,10 +127,12 @@ export const COPY = {
       options: ['Індивідуальні', 'Парні заняття', 'Іспити та бізнес'],
       submit: 'Записатися на пробне',
       thanks: 'Дякую! Я напишу тобі протягом дня.',
+      error: 'Не вдалося надіслати заявку. Напиши мені в Telegram — відповім швидко.',
       orTelegram: 'Або напиши мені одразу в Telegram',
     },
     foot: { channel: 'Telegram-канал', top: 'Нагору' },
     langLabel: 'Мова',
+    skip: 'До змісту',
   },
   en: {
     meta: {
@@ -222,9 +226,14 @@ export const COPY = {
       options: ['One-to-one', 'Pair lessons', 'Exams & business'],
       submit: 'Book my trial lesson',
       thanks: "Thank you! I'll write to you within a day.",
+      error: "Couldn't send the form. Message me on Telegram and I'll reply quickly.",
       orTelegram: 'Or message me on Telegram right away',
     },
     foot: { channel: 'Telegram channel', top: 'Back to top' },
     langLabel: 'Language',
+    skip: 'Skip to content',
   },
 }
+
+window.EWS = { LINKS, TRIAL_PRICE, PRICES, PACKAGES, PHRASES, GOAL_IDS, COPY }
+})()

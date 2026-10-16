@@ -1,21 +1,223 @@
 <!doctype html>
 <html lang="uk">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>English with Sam — розмовна американська англійська онлайн</title>
-    <meta name="description" content="Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Перше заняття — 499 ₴." />
-    <meta name="theme-color" content="#d92b21" />
-    <meta property="og:title" content="English with Sam" />
-    <meta property="og:description" content="Розмовна американська англійська онлайн. 70% заняття говориш ти." />
-    <meta property="og:image" content="/sam.jpg" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>English with Sam — розмовна американська англійська онлайн</title>
+  <meta name="description" content="Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Перше заняття — 499 ₴.">
+  <meta name="theme-color" content="#d92b21">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="English with Sam">
+  <meta property="og:description" content="Розмовна американська англійська онлайн. 70% заняття говориш ти.">
+  <meta property="og:image" content="https://sviatenglish.netlify.app/assets/img/og.jpg">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div class="page">
+  <a class="skip" href="#main" data-i18n="skip">До змісту</a>
+
+  <!-- NAV -->
+  <header class="nav wrap rise">
+    <a href="#top" class="wordmark"><span class="dot" aria-hidden="true"></span>english with sam</a>
+    <nav aria-label="Main" class="nav-links">
+      <a href="#how" data-i18n="nav.how">Як це працює</a>
+      <a href="#about" data-i18n="nav.about">Про Сема</a>
+      <a href="#prices" data-i18n="nav.prices">Ціни</a>
+      <a href="#faq" data-i18n="nav.faq">Питання</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Мова" data-i18n-aria="langLabel">
+        <button type="button" class="lang on" data-lang="ua" aria-pressed="true">UA</button>
+        <button type="button" class="lang" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-sm nav-cta" href="#book" data-i18n="nav.cta">Пробне заняття</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="top" class="hero">
+      <div class="hero-shape">
+        <picture class="hero-person">
+          <source srcset="assets/img/sam.webp" type="image/webp">
+          <img src="assets/img/sam.png" alt="Sam" width="1400" height="1378" fetchpriority="high">
+        </picture>
+        <div class="badge"><b>70%</b><span data-i18n="hero.badge">часу на занятті говориш ти</span></div>
+      </div>
+      <div class="wrap hero-inner">
+        <div class="hero-text">
+          <h1 class="rise d1" data-i18n="hero.h1">говори англійською вільно</h1>
+          <p class="lead rise d2" data-i18n="hero.lead">Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Викладач із сертифікатом TEFL/TESOL.</p>
+          <div class="hero-actions rise d3">
+            <a class="btn" href="#book"><span data-i18n="hero.cta">Записатися на пробне · 499 ₴</span> <span class="arr" aria-hidden="true">→</span></a>
+            <a class="text-link" href="#prices" data-i18n="hero.second">Дивитися ціни</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+    <!-- GOAL PICKER -->
+    <section class="goal" aria-labelledby="goal-h">
+      <div class="wrap split">
+        <div class="reveal goal-left">
+          <h2 id="goal-h" class="h2" data-i18n="goal.h2">для чого тобі англійська?</h2>
+          <p class="body" data-i18n="goal.lead">Обери одне. Кожен план починається з фраз, які ти справді вживатимеш, а граматику будуємо навколо них.</p>
+          <div class="chips" id="goal-chips" role="group" aria-label="для чого тобі англійська?" data-i18n-aria="goal.h2"></div>
+        </div>
+        <div class="reveal goal-right">
+          <p class="muted-light" data-i18n="goal.pre">Вже за перший місяць ти казатимеш:</p>
+          <div class="phrases" id="phrases" aria-live="polite"></div>
+          <p class="body"><strong class="focus-label" data-i18n="goal.focusLabel">Фокус занять:</strong> <span id="goal-focus"></span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="sec" aria-labelledby="how-h">
+      <div class="wrap">
+        <div class="split reveal intro">
+          <h2 id="how-h" class="h2 col-left" data-i18n="how.h2">як це працює</h2>
+          <p class="body col-right" data-i18n="how.lead">Від першого дзвінка до дня, коли помічаєш, що думаєш англійською. Чотири кроки без марафону підручників.</p>
+        </div>
+        <div class="steps reveal" id="steps"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="sec sec-about" aria-labelledby="about-h">
+      <div class="about-panel reveal">
+        <div class="split">
+          <h2 id="about-h" class="h2 about-h" data-i18n="about.h2">привіт, я сем. давай говорити.</h2>
+          <div class="about-text">
+            <div>
+              <h3 data-i18n="about.whoH">Хто я</h3>
+              <p data-i18n="about.who">Викладач розмовної американської англійської з сертифікатом TEFL/TESOL. Допомагаю тим, хто розуміє англійську, але завмирає, коли треба говорити, нарешті заговорити без страху помилок.</p>
+            </div>
+            <div>
+              <h3 data-i18n="about.howH">Як я навчаю</h3>
+              <p data-i18n="about.how">Говоримо про твою роботу, подорожі, твій тиждень. Я занотовую помилки, які мають значення, і ми виправляємо їх на наступному занятті, в тому ж контексті.</p>
+            </div>
+            <div><a class="btn" href="#book"><span data-i18n="about.cta">Познайомимось на пробному</span> <span class="arr" aria-hidden="true">→</span></a></div>
+          </div>
+        </div>
+        <div class="about-portrait">
+          <picture>
+            <source srcset="assets/img/sam.webp" type="image/webp">
+            <img src="assets/img/sam.png" alt="Sam" width="1400" height="1378" loading="lazy">
+          </picture>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section class="sec" aria-label="Відгук студента" data-i18n-aria="review.label">
+      <div class="wrap split">
+        <div class="reveal rev-photo" role="img" aria-label="Фото студента" data-i18n-aria="review.photo">
+          <svg width="80" height="80" viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" aria-hidden="true"><circle cx="48" cy="34" r="16"/><path d="M16 84c4-17 17-26 32-26s28 9 32 26"/></svg>
+          <span data-i18n="review.photo">Фото студента</span>
+        </div>
+        <div class="reveal quote-col">
+          <blockquote data-i18n="review.quote">[Тут будуть справжні слова студента про його прогрес, три–пʼять рядків.]</blockquote>
+          <p class="cite"><strong data-i18n="review.name">[Імʼя студента]</strong>, <span data-i18n="review.role">[для чого вчить англійську]</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="prices" class="sec" aria-labelledby="prices-h">
+      <div class="wrap">
+        <div class="price-head reveal">
+          <h2 id="prices-h" class="h2" data-i18n="price.h2">обери свій темп</h2>
+          <div class="chips" id="pkg-chips" role="group" aria-label="обери свій темп" data-i18n-aria="price.h2"></div>
+          <p class="pkg-note" id="pkg-note"></p>
+        </div>
+        <div class="tiles" id="tiles"></div>
+        <p class="body trial-note reveal"><strong data-i18n="price.trialStrong">Перше заняття — 499 ₴</strong> <span data-i18n="price.trial">(окрім іспитів та бізнес-англійської). Визначаємо рівень, ставимо мету, і ти відчуваєш формат ще до купівлі пакета.</span></p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="sec" aria-labelledby="faq-h">
+      <div class="wrap split faq-grid">
+        <h2 id="faq-h" class="h2 faq-h" data-i18n="faq.h2">чесні питання</h2>
+        <div class="faq-list" id="faq-list"></div>
+      </div>
+    </section>
+
+    <!-- BOOKING COUPON -->
+    <section id="book" class="sec sec-book" aria-labelledby="book-h">
+      <div class="wrap">
+        <form class="coupon reveal" id="book-form" name="trial" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="trial">
+          <p class="sr"><label>Не заповнюй: <input name="bot-field"></label></p>
+          <span class="notch notch-top" aria-hidden="true"></span>
+          <span class="notch notch-bottom" aria-hidden="true"></span>
+          <span class="perf" aria-hidden="true"></span>
+          <div class="coupon-left">
+            <h2 id="book-h" data-i18n="form.h2">перше заняття, 499 ₴</h2>
+            <p data-i18n="form.lead">Залиш контакти, і я напишу тобі протягом дня, щоб обрати час.</p>
+          </div>
+          <div class="coupon-right" id="form-fields">
+            <label class="sr" for="f-name" data-i18n="form.name">Твоє імʼя</label>
+            <input class="field" id="f-name" name="name" type="text" placeholder="Твоє імʼя" data-i18n-placeholder="form.name" autocomplete="name" required>
+            <label class="sr" for="f-handle" data-i18n="form.handle">Telegram або Instagram</label>
+            <input class="field" id="f-handle" name="handle" type="text" placeholder="Telegram або Instagram" data-i18n-placeholder="form.handle" required>
+            <label class="sr" for="f-phone" data-i18n="form.phone">Телефон</label>
+            <input class="field" id="f-phone" name="phone" type="tel" placeholder="Телефон" data-i18n-placeholder="form.phone" autocomplete="tel" inputmode="tel">
+            <label class="sr" for="f-format" data-i18n="form.format">Формат занять</label>
+            <select class="field" id="f-format" name="format"></select>
+            <button type="submit" class="btn btn-dark btn-full"><span data-i18n="form.submit">Записатися на пробне</span> <span class="arr" aria-hidden="true">→</span></button>
+          </div>
+          <div class="coupon-right thanks" id="form-thanks" role="status" hidden>
+            <p data-i18n="form.thanks">Дякую! Я напишу тобі протягом дня.</p>
+            <a class="btn btn-dark" href="https://t.me/english_sam7" target="_blank" rel="noopener"><span data-i18n="form.orTelegram">Або напиши мені одразу в Telegram</span> <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="blocks reveal" role="img" aria-label="English with Sam">
+        <div class="blk" style="height:100%">s</div>
+        <div class="blk blk-dark" style="height:74%">a</div>
+        <div class="blk" style="height:88%">m</div>
+      </div>
+      <div class="split foot-links">
+        <nav aria-label="Footer" class="foot-nav">
+          <a href="#how" data-i18n="nav.how">Як це працює</a>
+          <a href="#about" data-i18n="nav.about">Про Сема</a>
+          <a href="#prices" data-i18n="nav.prices">Ціни</a>
+          <a href="#faq" data-i18n="nav.faq">Питання</a>
+        </nav>
+        <div class="foot-social">
+          <a href="https://t.me/english_sam7" target="_blank" rel="noopener">Telegram</a>
+          <a href="https://www.instagram.com/english_with_sam7/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@sam_englishteacher" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.facebook.com/share/1JaHwCmzrp/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://t.me/english_sam77" target="_blank" rel="noopener" data-i18n="foot.channel">Telegram-канал</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span id="year">2026</span> English with Sam</span>
+        <a class="btn btn-sm" href="#book" data-i18n="nav.cta">Пробне заняття</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="btn mobile-cta" href="#book"><span data-i18n="hero.cta">Записатися на пробне · 499 ₴</span> <span class="arr" aria-hidden="true">→</span></a>
+</div>
+
+<script src="assets/js/content.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
 </html>
