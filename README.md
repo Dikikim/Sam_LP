@@ -17,6 +17,14 @@ Plain HTML, CSS and JavaScript: **no build step, nothing to install**.
 | Colours, layout, animation, mobile styles | `assets/css/styles.css` |
 | Interactive parts (language, goals, steps, prices, form) | `assets/js/app.js` |
 | Photos | `assets/img/` (`sam.webp` + `sam.png` fallback) |
+| Small "About" photos, teacher photos | `PHOTOS` and `TEACHER_PHOTOS` in `assets/js/content.js` (put files in `assets/img/photos/`; `null` = empty frame) |
+| Achievements, teachers, reviews | `achievements`, `teachers`, `reviews` in `assets/js/content.js` |
+
+## Colours and fonts
+
+- One main colour (green `--accent`) + two accents (`--peach`, `--butter`), set at the top of `styles.css`.
+- Two font variants: **A** Unbounded + Manrope (default, like SpeakEasy) and **B** Oswald + Open Sans (like SkorykEd).
+  Open the page with `?font=b` to see B. To make B the default, change `var v = 'a'` to `'b'` in the `<head>` script of `index.html`.
 
 The original 43 MB photo in `Photo/` is kept out of git; the site uses the
 web-sized copies in `assets/img/`.
@@ -32,5 +40,5 @@ web-sized copies in `assets/img/`.
 ## Before launch
 
 - Fill in everything still in `[brackets]` in `assets/js/content.js`
-  (trial length, cancellation rule, age, payment terms, student review).
-- Confirm whether the trial lesson is 499 ₴ or free.
+  (trial length, cancellation rule, age, payment terms, achievements, teachers, student reviews).
+- The trial lesson is free (except exams & business).

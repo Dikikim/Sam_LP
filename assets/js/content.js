@@ -1,6 +1,5 @@
-/* English with Sam: all page text, prices and links. Edit both ua and en. */
+/* English with Sam: all page text, prices, photos and links. Edit both ua and en. */
 (function () {
-// All page copy, prices and links live here. Edit text in both languages.
 
 const LINKS = {
   booking: 'https://t.me/english_sam7',
@@ -10,7 +9,18 @@ const LINKS = {
   facebook: 'https://www.facebook.com/share/1JaHwCmzrp/',
 }
 
-const TRIAL_PRICE = '499 ₴'
+// Small personal photos in the "About" collage (any size; they are cropped to 4:5).
+// Put files in assets/img/photos/ and list them here. null = empty frame.
+const PHOTOS = [
+  'assets/img/sam.webp',
+  null,
+  null,
+  null,
+  null,
+]
+
+// Teacher card photos, same order as COPY.*.teachers.items. null = placeholder.
+const TEACHER_PHOTOS = ['assets/img/sam.webp', null, null]
 
 // [package total, price per lesson]
 const PRICES = {
@@ -20,57 +30,39 @@ const PRICES = {
   32: { pair: ['16 000 ₴', '500 ₴'], solo: ['19 200 ₴', '600 ₴'], exam: ['24 000 ₴', '750 ₴'] },
 }
 const PACKAGES = [4, 8, 16, 32]
-
-const PHRASES = {
-  work: ['Could we push the call to Thursday?', 'Let me walk you through the numbers.', 'Sorry, can I just add something here?'],
-  travel: ['Is this seat taken?', 'Where do locals actually eat around here?', "I think there's a mistake on the bill."],
-  exams: ['The graph shows a steady rise in…', 'On the one hand… on the other hand…', "To sum up, I'd argue that…"],
-  life: ["I've been meaning to tell you…", "No way, that's hilarious.", 'Sorry, could you say that again?'],
-}
 const GOAL_IDS = ['work', 'travel', 'exams', 'life']
 
 const COPY = {
   ua: {
     meta: {
       title: 'English with Sam — розмовна американська англійська онлайн',
-      description: 'Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Перше заняття — 499 ₴.',
+      description: 'Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Перше заняття — безкоштовно.',
     },
-    nav: { how: 'Як це працює', about: 'Про Сема', prices: 'Ціни', faq: 'Питання', cta: 'Пробне заняття' },
+    nav: { about: 'Про Сема', teachers: 'Викладачі', prices: 'Ціни', reviews: 'Відгуки', faq: 'Питання', cta: 'Безкоштовне пробне' },
     heads: {
-      hero: ['Говори англійською', 'вільно з Семом'],
-      services: ['Формати', 'занять'],
+      hero: ['Говори англійською', 'вільно з Семом'],
       goal: ['Для чого тобі', 'англійська?'],
-      how: ['Як це', 'працює'],
-      about: ['Привіт, я Сем.', 'Давай говорити.'],
+      about: ['Привіт, я Сем.', 'Давай говорити.'],
+      achievements: ['Мої', 'досягнення'],
+      teachers: ['Наші', 'викладачі'],
+      reviews: ['Що кажуть', 'студенти'],
       price: ['Обери свій', 'темп'],
       faq: ['Чесні', 'питання'],
     },
+    hero: {
+      lead: 'Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти.',
+      cta: 'Записатися на безкоштовне пробне',
+      second: 'Дізнатися більше',
+    },
     cards: {
       talkTitle: '70% практики', talkText: 'часу на занятті говориш ти',
-      certTitle: 'TEFL/TESOL', certText: 'сертифікований викладач',
+      trialTitle: 'Пробне — безкоштовно', trialText: 'знайомимось і визначаємо рівень',
     },
-    services: {
-      lead: 'Обери, як тобі зручніше вчитися: сам на сам із викладачем, у парі з другом або з фокусом на іспит чи роботу.',
-      cta: 'Записатися на пробне',
-      more: 'Дивитися ціни',
-      items: [
-        { title: 'Індивідуальні', text: 'План під твою мету й графік. Більшість часу на занятті говориш ти.' },
-        { title: 'Парні заняття', text: 'Вчися з другом чи партнером: дешевше, а говорити вдвох легше.' },
-        { title: 'Іспити та бізнес', text: 'IELTS, TOEFL, НМТ, співбесіди, презентації та листи англійською.' },
-      ],
-    },
-    hero: {
-      h1: 'говори англійською вільно',
-      lead: 'Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Викладач із сертифікатом TEFL/TESOL.',
-      cta: `Записатися на пробне · ${TRIAL_PRICE}`,
-      second: 'Дивитися ціни',
-      badge: 'часу на занятті говориш ти',
-    },
-    marquee: ['говори без страху', 'американська англійська', '70% практики', 'онлайн з будь-якої точки'],
+    marquee: ['для подорожей', 'для роботи', 'для нових знайомств', 'для бізнесу', 'для ІТ', 'для іспитів'],
     goal: {
-      h2: 'для чого тобі англійська?',
+      chipsLabel: 'Для чого тобі англійська?',
       lead: 'Обери одне. Кожен план починається з фраз, які ти справді вживатимеш, а граматику будуємо навколо них.',
-      pre: 'Вже за перший місяць ти казатимеш:',
+      pre: 'Тобі точно сюди, якщо:',
       focusLabel: 'Фокус занять:',
       labels: { work: 'Робота', travel: 'Подорожі', exams: 'Іспити', life: 'Щоденне життя' },
       focus: {
@@ -79,58 +71,78 @@ const COPY = {
         exams: 'завдання IELTS, TOEFL або НМТ на час, з фідбеком на кожну відповідь.',
         life: 'фільми, друзі, хобі й розуміння людей, які говорять швидко.',
       },
-      tr: {
-        work: ['Можемо перенести дзвінок на четвер?', 'Давайте я поясню цифри.', 'Вибачте, можна я дещо додам?'],
-        travel: ['Це місце вільне?', 'Де тут їдять місцеві?', 'Здається, в рахунку помилка.'],
-        exams: ['Графік показує стабільне зростання…', 'З одного боку… з іншого боку…', 'Підсумовуючи, я вважаю, що…'],
-        life: ['Давно хотів тобі сказати…', 'Та ну, це дуже смішно.', 'Вибач, можеш повторити?'],
+      fits: {
+        work: ['на дзвінках розумієш колег, але відповідаєш односкладово', 'лист англійською пишеш довше, ніж робиш саму задачу', 'хочеш упевнено пройти співбесіду в міжнародну компанію'],
+        travel: ['в аеропорту чи готелі показуєш пальцем замість говорити', 'хочеш спитати місцевих дорогу й зрозуміти відповідь', 'плануєш поїздку й не хочеш залежати від перекладача'],
+        exams: ['попереду IELTS, TOEFL чи НМТ і потрібен конкретний бал', 'граматику знаєш, а на speaking губишся', 'хочеш тренуватися у форматі іспиту з фідбеком'],
+        life: ['дивишся серіали із субтитрами й хочеш без них', 'розумієш англійську, але завмираєш, коли треба говорити', 'хочеш вільно спілкуватися з друзями з інших країн'],
       },
     },
-    how: {
-      h2: 'як це працює',
-      lead: 'Від першого дзвінка до дня, коли помічаєш, що думаєш англійською. Чотири кроки без марафону підручників.',
-      steps: [
-        ['Пробне заняття', 'Невимушена розмова. Визначаю твій рівень, питаю, для чого тобі англійська, і ти відчуваєш, як ми працюємо.'],
+    steps: {
+      label: 'Як проходить навчання',
+      items: [
+        ['Пробне заняття', 'Безкоштовна невимушена розмова. Визначаю твій рівень, питаю, для чого тобі англійська, і ти відчуваєш, як ми працюємо.'],
         ['Твій план', 'План на кожен місяць під твою мету: теми, ситуації та граматика, які тобі справді потрібні.'],
         ['Заняття', 'Живі онлайн-заняття, де більшість часу говориш ти. Короткі нотатки й домашнє після кожного.'],
         ['Перевірка', 'Кожні кілька місяців порівнюємо, де ти зараз і з чого починав, і коригуємо план.'],
       ],
     },
     about: {
-      h2: 'привіт, я сем. давай говорити.',
       whoH: 'Хто я',
-      who: 'Викладач розмовної американської англійської з сертифікатом TEFL/TESOL. Допомагаю тим, хто розуміє англійську, але завмирає, коли треба говорити, нарешті заговорити без страху помилок.',
+      who: 'Викладач розмовної американської англійської. Допомагаю тим, хто розуміє англійську, але завмирає, коли треба говорити, нарешті заговорити без страху помилок.',
       howH: 'Як я навчаю',
       how: 'Говоримо про твою роботу, подорожі, твій тиждень. Я занотовую помилки, які мають значення, і ми виправляємо їх на наступному занятті, в тому ж контексті.',
       cta: 'Познайомимось на пробному',
+      photosLabel: 'Фото Сема',
+      photoAlt: 'Сем',
+      photoEmpty: 'тут буде фото',
     },
-    review: {
-      label: 'Відгук студента',
-      photo: 'Фото студента',
-      quote: '[Тут будуть справжні слова студента про його прогрес, три–пʼять рядків.]',
-      name: '[Імʼя студента]',
-      role: '[для чого вчить англійську]',
+    achievements: {
+      lead: '[Коротко: чим ти пишаєшся як викладач — одне речення.]',
+      items: [
+        { num: '[N] років', text: 'викладаю англійську' },
+        { num: '[N]+', text: 'студентів заговорили англійською' },
+        { num: '[рівень]', text: '[твій рівень англійської або іспит, напр. IELTS 8.0]' },
+        { num: '[факт]', text: '[ще одне досягнення: життя чи робота в США, проєкти, виступи]' },
+      ],
+    },
+    teachers: {
+      lead: 'Усі викладачі працюють за одним підходом: з першого заняття говориш ти, а граматику будуємо навколо твоїх ситуацій.',
+      items: [
+        { name: 'Сем', role: 'Розмовна американська англійська', text: 'Допомагає заговорити без страху помилок: робота, подорожі, щоденне життя.', tags: ['Індивідуальні', 'Парні', '[рівні]'] },
+        { name: '[Імʼя викладача]', role: '[спеціалізація]', text: '[Два речення про досвід і підхід викладача.]', tags: ['[формати]', '[рівні]'] },
+        { name: '[Імʼя викладача]', role: '[спеціалізація, напр. IELTS чи НМТ]', text: '[Два речення про досвід і підхід викладача.]', tags: ['[формати]', '[рівні]'] },
+      ],
+    },
+    reviews: {
+      lead: 'Слова тих, хто вже заговорив.',
+      items: [
+        { quote: '[Справжні слова студента про прогрес, два–чотири рядки.]', name: '[Імʼя]', role: '[для чого вчить англійську]' },
+        { quote: '[Справжні слова студента про прогрес, два–чотири рядки.]', name: '[Імʼя]', role: '[для чого вчить англійську]' },
+        { quote: '[Справжні слова студента про прогрес, два–чотири рядки.]', name: '[Імʼя]', role: '[для чого вчить англійську]' },
+      ],
     },
     price: {
-      h2: 'обери свій темп',
+      fmtLabel: 'Формат занять',
+      pkgLabel: 'Пакети занять',
       counts: { 4: '4 заняття', 8: '8 занять', 16: '16 занять', 32: '32 заняття' },
-      notes: { 4: 'Пакет діє 30 днів', 8: 'Пакет діє 50 днів', 16: 'Пакет діє 80 днів', 32: 'Пакет діє 140 днів' },
+      notes: { 4: 'діє 30 днів', 8: 'діє 50 днів', 16: 'діє 80 днів', 32: 'діє 140 днів' },
       perLesson: 'за заняття',
       perPerson: 'з людини за заняття',
+      save: 'вигода',
       choose: 'Обрати',
-      names: { pair: 'Парні заняття', solo: 'Індивідуальні', exam: 'Іспити та бізнес' },
+      names: { solo: 'Індивідуальні', pair: 'Парні заняття', exam: 'Іспити та бізнес' },
       lines: {
-        pair: ['Ціна з однієї людини', 'Вчися з другом або партнером'],
         solo: ['План під твою мету', 'Графік під твій темп життя', 'Нотатки й домашнє після кожного заняття'],
-        exam: ['Індивідуальні заняття', 'Формат IELTS, TOEFL або НМТ', 'Пробні тести з письмовим фідбеком', 'Співбесіди, презентації, листи', 'Лексика твоєї сфери'],
+        pair: ['Ціна з однієї людини', 'Вчися з другом або партнером', 'Говорити вдвох легше й веселіше'],
+        exam: ['Індивідуальні заняття', 'Формат IELTS, TOEFL або НМТ', 'Пробні тести з письмовим фідбеком', 'Співбесіди, презентації, листи'],
       },
-      trialStrong: `Перше заняття — ${TRIAL_PRICE}`,
+      trialStrong: 'Перше заняття — безкоштовно',
       trial: '(окрім іспитів та бізнес-англійської). Визначаємо рівень, ставимо мету, і ти відчуваєш формат ще до купівлі пакета.',
     },
     faq: {
-      h2: 'чесні питання',
       items: [
-        { q: 'Що відбувається на пробному занятті?', a: 'Ми говоримо [45] хвилин. Я визначаю твій рівень, питаю, для чого тобі англійська, і ти отримуєш план на перший місяць.' },
+        { q: 'Що відбувається на пробному занятті?', a: 'Ми безкоштовно говоримо [45] хвилин. Я визначаю твій рівень, питаю, для чого тобі англійська, і ти отримуєш план на перший місяць.' },
         { q: 'Скільки триває заняття?', a: '60 хвилин онлайн у Zoom або Google Meet. Потрібні лише ноутбук або телефон і навушники.' },
         { q: 'Скільки діє пакет?', a: '4 заняття діють 30 днів, 8 занять — 50 днів, 16 занять — 80 днів, 32 заняття — 140 днів.' },
         { q: 'Я зовсім початківець. Мені підійде?', a: 'Так. З початківцями ми теж говоримо з першого заняття, просто короткими й простими реченнями. [Уточни рівні, з якими працюєш.]' },
@@ -141,63 +153,53 @@ const COPY = {
       ],
     },
     form: {
-      h2: `Перше заняття — ${TRIAL_PRICE}`,
+      h2: 'Перше заняття — безкоштовно',
       lead: 'Залиш контакти, і я напишу тобі протягом дня, щоб обрати час.',
       name: 'Твоє імʼя',
       handle: 'Telegram або Instagram',
       phone: 'Телефон',
       format: 'Формат занять',
       options: ['Індивідуальні', 'Парні заняття', 'Іспити та бізнес'],
-      submit: 'Записатися на пробне',
+      submit: 'Записатися на безкоштовне пробне',
       thanks: 'Дякую! Я напишу тобі протягом дня.',
       error: 'Не вдалося надіслати заявку. Напиши мені в Telegram — відповім швидко.',
       orTelegram: 'Або напиши мені одразу в Telegram',
     },
-    foot: { channel: 'Telegram-канал', top: 'Нагору' },
+    foot: { social: 'Ми в соцмережах', channel: 'Telegram-канал', top: 'Нагору' },
+    mobileCta: 'Безкоштовне пробне заняття',
     langLabel: 'Мова',
     skip: 'До змісту',
   },
   en: {
     meta: {
       title: 'English with Sam — conversational American English online',
-      description: 'Conversational American English without the barrier, online for adults and teens. 70% of every lesson is you speaking. First lesson 499 ₴.',
+      description: 'Conversational American English without the barrier, online for adults and teens. 70% of every lesson is you speaking. Your first lesson is free.',
     },
-    nav: { how: 'How it works', about: 'About Sam', prices: 'Prices', faq: 'Questions', cta: 'Book a trial' },
+    nav: { about: 'About Sam', teachers: 'Teachers', prices: 'Prices', reviews: 'Reviews', faq: 'Questions', cta: 'Free trial' },
     heads: {
       hero: ['Speak English', 'freely with Sam'],
-      services: ['Lesson', 'formats'],
       goal: ['What do you need', 'English for?'],
-      how: ['How it', 'works'],
       about: ["Hi, I'm Sam.", "Let's talk."],
+      achievements: ['What I have', 'achieved'],
+      teachers: ['Our', 'teachers'],
+      reviews: ['What students', 'say'],
       price: ['Pick your', 'pace'],
       faq: ['Fair', 'questions'],
     },
+    hero: {
+      lead: 'Conversational American English without the barrier, online for adults and teens. 70% of every lesson is you speaking.',
+      cta: 'Book a free trial lesson',
+      second: 'Learn more',
+    },
     cards: {
       talkTitle: '70% practice', talkText: 'of the lesson, you do the talking',
-      certTitle: 'TEFL/TESOL', certText: 'certified teacher',
+      trialTitle: 'Free trial', trialText: 'we meet and find your level',
     },
-    services: {
-      lead: 'Choose how you like to learn: one-to-one with your teacher, in a pair with a friend, or focused on an exam or your job.',
-      cta: 'Book a trial lesson',
-      more: 'See prices',
-      items: [
-        { title: 'One-to-one', text: 'A plan built around your goal and schedule. You do most of the talking.' },
-        { title: 'Pair lessons', text: 'Learn with a friend or partner: cheaper, and talking is easier with two.' },
-        { title: 'Exams & business', text: 'IELTS, TOEFL, НМТ, job interviews, presentations and emails in English.' },
-      ],
-    },
-    hero: {
-      h1: 'talk your way into english',
-      lead: 'Conversational American English without the barrier, online for adults and teens. 70% of every lesson is you speaking. TEFL/TESOL-certified teacher.',
-      cta: `Book a trial lesson · ${TRIAL_PRICE}`,
-      second: 'See prices',
-      badge: 'of the lesson, you do the talking',
-    },
-    marquee: ['speak without fear', 'American English', '70% practice', 'online from anywhere'],
+    marquee: ['for travel', 'for work', 'for new friends', 'for business', 'for IT', 'for exams'],
     goal: {
-      h2: 'what do you need english for?',
+      chipsLabel: 'What do you need English for?',
       lead: 'Pick one. Each plan starts with the sentences you will actually use and builds the grammar around them.',
-      pre: "In your first month, you'll be saying things like",
+      pre: "You're in the right place if:",
       focusLabel: 'Lesson focus:',
       labels: { work: 'Work', travel: 'Travel', exams: 'Exams', life: 'Everyday life' },
       focus: {
@@ -206,53 +208,78 @@ const COPY = {
         exams: 'IELTS, TOEFL or НМТ tasks, timed, with feedback on every answer.',
         life: 'films, friends, hobbies and understanding people who speak fast.',
       },
-      tr: null,
+      fits: {
+        work: ['you follow calls but answer in single words', 'an email in English takes longer than the task itself', 'you want to ace an interview at an international company'],
+        travel: ['at airports and hotels you point instead of talking', 'you want to ask locals the way and understand the answer', "you're planning a trip and don't want to rely on a translator"],
+        exams: ['IELTS, TOEFL or НМТ is coming and you need a set score', 'you know the grammar but get lost in the speaking part', 'you want to practise in the exam format with feedback'],
+        life: ['you watch shows with subtitles and want to drop them', "you understand English but freeze when it's time to speak", 'you want to talk freely with friends from other countries'],
+      },
     },
-    how: {
-      h2: 'how it works',
-      lead: "From the first call to the day you notice you're thinking in English. Four steps, no textbook marathon.",
-      steps: [
-        ['Trial lesson', 'A relaxed conversation. I find your level, ask what you need English for, and you get a feel for how we work.'],
+    steps: {
+      label: 'How learning works',
+      items: [
+        ['Trial lesson', 'A free, relaxed conversation. I find your level, ask what you need English for, and you get a feel for how we work.'],
         ['Your plan', 'A month-by-month plan built on your goal: the topics, the situations and the grammar you actually need.'],
         ['Lessons', 'Live lessons online where you do most of the talking. Short notes and homework after each one.'],
         ['Check-in', 'Every few months we compare where you are with where you started, and adjust the plan.'],
       ],
     },
     about: {
-      h2: "hi, i'm sam. let's just talk.",
       whoH: 'Who I am',
-      who: 'A TEFL/TESOL-certified teacher of conversational American English. I help people who understand English but freeze when it is time to speak finally start talking, without the fear of mistakes.',
+      who: 'A teacher of conversational American English. I help people who understand English but freeze when it is time to speak finally start talking, without the fear of mistakes.',
       howH: 'How I teach',
       how: 'We talk about your work, your trips, your week. I note the mistakes that matter, and we fix them in the next lesson, in the context you made them in.',
       cta: 'Meet me on a trial lesson',
+      photosLabel: 'Photos of Sam',
+      photoAlt: 'Sam',
+      photoEmpty: 'photo coming soon',
     },
-    review: {
-      label: 'What a student says',
-      photo: 'Student photo',
-      quote: "[A real student's words about their progress go here, three to five lines in their own voice.]",
-      name: '[Student name]',
-      role: '[what they learn English for]',
+    achievements: {
+      lead: '[In one sentence: what you are proud of as a teacher.]',
+      items: [
+        { num: '[N] years', text: 'teaching English' },
+        { num: '[N]+', text: 'students now speaking English' },
+        { num: '[level]', text: '[your English level or exam, e.g. IELTS 8.0]' },
+        { num: '[fact]', text: '[one more achievement: life or work in the US, projects, talks]' },
+      ],
+    },
+    teachers: {
+      lead: 'Every teacher works the same way: you speak from the first lesson, and grammar is built around your real situations.',
+      items: [
+        { name: 'Sam', role: 'Conversational American English', text: 'Helps you start speaking without the fear of mistakes: work, travel, everyday life.', tags: ['One-to-one', 'Pairs', '[levels]'] },
+        { name: '[Teacher name]', role: '[speciality]', text: "[Two sentences about the teacher's experience and approach.]", tags: ['[formats]', '[levels]'] },
+        { name: '[Teacher name]', role: '[speciality, e.g. IELTS or НМТ]', text: "[Two sentences about the teacher's experience and approach.]", tags: ['[formats]', '[levels]'] },
+      ],
+    },
+    reviews: {
+      lead: 'In the words of people who already speak.',
+      items: [
+        { quote: "[A real student's words about their progress, two to four lines.]", name: '[Name]', role: '[what they learn English for]' },
+        { quote: "[A real student's words about their progress, two to four lines.]", name: '[Name]', role: '[what they learn English for]' },
+        { quote: "[A real student's words about their progress, two to four lines.]", name: '[Name]', role: '[what they learn English for]' },
+      ],
     },
     price: {
-      h2: 'pick your pace',
+      fmtLabel: 'Lesson format',
+      pkgLabel: 'Lesson packages',
       counts: { 4: '4 lessons', 8: '8 lessons', 16: '16 lessons', 32: '32 lessons' },
-      notes: { 4: 'Package valid for 30 days', 8: 'Package valid for 50 days', 16: 'Package valid for 80 days', 32: 'Package valid for 140 days' },
+      notes: { 4: 'valid for 30 days', 8: 'valid for 50 days', 16: 'valid for 80 days', 32: 'valid for 140 days' },
       perLesson: 'per lesson',
       perPerson: 'per person per lesson',
+      save: 'you save',
       choose: 'Choose',
-      names: { pair: 'Pair lessons', solo: 'One-to-one', exam: 'Exams & business' },
+      names: { solo: 'One-to-one', pair: 'Pair lessons', exam: 'Exams & business' },
       lines: {
-        pair: ['Price per person', 'Learn with a friend or partner'],
         solo: ['A plan built around your goal', 'Schedule that moves with you', 'Notes and homework after each lesson'],
-        exam: ['One-to-one lessons', 'IELTS, TOEFL or НМТ format practice', 'Mock tests with written feedback', 'Interviews, presentations, emails', 'Vocabulary for your field'],
+        pair: ['Price per person', 'Learn with a friend or partner', 'Talking is easier, and more fun, with two'],
+        exam: ['One-to-one lessons', 'IELTS, TOEFL or НМТ format practice', 'Mock tests with written feedback', 'Interviews, presentations, emails'],
       },
-      trialStrong: `First lesson: ${TRIAL_PRICE}`,
+      trialStrong: 'Your first lesson is free',
       trial: '(not available for exams & business). We find your level, set a goal and you see how lessons feel before buying a package.',
     },
     faq: {
-      h2: 'fair questions',
       items: [
-        { q: 'What happens on the trial lesson?', a: 'We talk for [45] minutes. I check your level as we go, ask what you need English for, and you leave with a plan for the first month.' },
+        { q: 'What happens on the trial lesson?', a: 'We talk for [45] minutes, free of charge. I check your level as we go, ask what you need English for, and you leave with a plan for the first month.' },
         { q: 'How long is a lesson?', a: '60 minutes, online on Zoom or Google Meet. All you need is a laptop or phone and headphones.' },
         { q: 'How long is a package valid?', a: '4 lessons are valid for 30 days, 8 lessons for 50 days, 16 lessons for 80 days and 32 lessons for 140 days.' },
         { q: "I'm a total beginner. Is this for me?", a: 'Yes. With beginners we speak from the first lesson too, just in short, simple sentences. [Confirm the levels you teach.]' },
@@ -263,23 +290,24 @@ const COPY = {
       ],
     },
     form: {
-      h2: `Your first lesson: ${TRIAL_PRICE}`,
+      h2: 'Your first lesson is free',
       lead: "Leave your details and I'll write to you within a day to pick a time.",
       name: 'Your name',
       handle: 'Telegram or Instagram',
       phone: 'Phone',
       format: 'Lesson format',
       options: ['One-to-one', 'Pair lessons', 'Exams & business'],
-      submit: 'Book my trial lesson',
+      submit: 'Book my free trial',
       thanks: "Thank you! I'll write to you within a day.",
       error: "Couldn't send the form. Message me on Telegram and I'll reply quickly.",
       orTelegram: 'Or message me on Telegram right away',
     },
-    foot: { channel: 'Telegram channel', top: 'Back to top' },
+    foot: { social: 'Find us on social media', channel: 'Telegram channel', top: 'Back to top' },
+    mobileCta: 'Free trial lesson',
     langLabel: 'Language',
     skip: 'Skip to content',
   },
 }
 
-window.EWS = { LINKS, TRIAL_PRICE, PRICES, PACKAGES, PHRASES, GOAL_IDS, COPY }
+window.EWS = { LINKS, PHOTOS, TEACHER_PHOTOS, PRICES, PACKAGES, GOAL_IDS, COPY }
 })()

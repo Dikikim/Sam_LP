@@ -5,22 +5,14 @@
   var D = window.EWS
   var COPY = D.COPY
 
-  var STEP_TINTS = [
-    { bg: '#1f2148', ink: '#ffffff' },
-    { bg: '#2563eb', ink: '#ffffff' },
-    { bg: 'linear-gradient(160deg, #ffb627, #f7931e)', ink: '#1f2148' },
-    { bg: '#ffe7a8', ink: '#1f2148' },
+  // Lesson formats, in the same order as the booking form options
+  var FORMATS = [
+    { id: 'solo', perKey: 'perLesson' },
+    { id: 'pair', perKey: 'perPerson' },
+    { id: 'exam', perKey: 'perLesson' },
   ]
-  var PLANS = [
-    { id: 'pair', featured: false, perKey: 'perPerson', icon: 'i-users', tone: 'ico-blue' },
-    { id: 'solo', featured: true, perKey: 'perLesson', icon: 'i-user', tone: '' },
-    { id: 'exam', featured: false, perKey: 'perLesson', icon: 'i-case', tone: 'ico-yellow' },
-  ]
-  function icon(id, tone) {
-    return '<span class="ico ' + tone + '"><svg aria-hidden="true"><use href="#' + id + '"/></svg></span>'
-  }
 
-  var state = { lang: initialLang(), goal: 'work', step: 0, pkg: 16 }
+  var state = { lang: initialLang(), goal: 'work', step: 0, fmt: 'solo' }
 
   function $(id) { return document.getElementById(id) }
   function t() { return COPY[state.lang] }
@@ -32,6 +24,11 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
     })
   }
+  function use(id, cls) {
+    return '<svg class="' + (cls || 'i') + '" aria-hidden="true"><use href="#' + id + '"/></svg>'
+  }
+  function num(s) { return Number(String(s).replace(/\D/g, '')) }
+  function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₴' }
   var ARROW = ' <span class="arr" aria-hidden="true">→</span>'
 
   function initialLang() {
@@ -72,10 +69,21 @@
 
   /* ---------- Dynamic blocks ---------- */
   function renderMarquee() {
-    if (!$('marquee')) return
     var items = t().marquee
-    var all = items.concat(items, items, items)
-    $('marquee').innerHTML = all.map(function (m) { return '<span>' + esc(m) + '</span>' }).join('')
+    var one = items.map(function (m) { return '<span>' + esc(m) + '</span><i aria-hidden="true">✦</i>' }).join('')
+    // Two identical halves, so sliding by -50% loops without a jump
+    $('marquee').innerHTML = '<div class="mq-half">' + one + one + '</div><div class="mq-half" aria-hidden="true">' + one + one + '</div>'
+    $('marquee-sr').textContent = items.join(', ')
+  }
+
+  function renderPhotos() {
+    var c = t().about
+    $('photos').innerHTML = D.PHOTOS.map(function (p, i) {
+      var inner = p
+        ? '<img src="' + esc(p) + '" alt="' + esc(c.photoAlt) + '" loading="lazy" width="320" height="400">'
+        : use('i-camera') + '<span>' + esc(c.photoEmpty) + '</span>'
+      return '<figure class="snap snap-' + (i % 6) + (p ? '' : ' snap-empty') + '">' + inner + '</figure>'
+    }).join('')
   }
 
   function renderGoalChips() {
@@ -87,43 +95,77 @@
     }).join('')
   }
 
-  function renderPhrases() {
+  function renderFits() {
     var c = t()
-    $('phrases').innerHTML = D.PHRASES[state.goal].map(function (en, i) {
-      var tr = c.goal.tr ? c.goal.tr[state.goal][i] : ''
-      return '<div class="phrase"><div class="phrase-en">' + esc(en) + '</div>' +
-        (tr ? '<div class="phrase-tr">' + esc(tr) + '</div>' : '') + '</div>'
+    $('fits').innerHTML = c.goal.fits[state.goal].map(function (s) {
+      return '<li class="fit"><span class="fit-ico">' + use('i-check') + '</span><span>' + esc(s) + '</span></li>'
     }).join('')
     $('goal-focus').textContent = c.goal.focus[state.goal]
   }
 
   function renderSteps() {
-    $('steps').innerHTML = t().how.steps.map(function (s, i) {
+    $('steps').innerHTML = t().steps.items.map(function (s, i) {
       var open = i === state.step
-      var tint = STEP_TINTS[i]
-      var inner = open
-        ? '<div class="step-open"><h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p></div>'
-        : '<button type="button" class="sliver" data-step="' + i + '" aria-expanded="false"><span class="vname">' + esc(s[0]) + '</span></button>'
-      return '<div class="step' + (open ? ' open' : '') + '" style="background:' + tint.bg + ';color:' + tint.ink + '">' + inner + '</div>'
+      return '<div class="step step-' + i + (open ? ' open' : '') + '">' +
+        '<button type="button" class="step-head" data-step="' + i + '" aria-expanded="' + open + '" aria-controls="step-b' + i + '">' +
+        '<span class="step-num">0' + (i + 1) + '</span><span class="step-title">' + esc(s[0]) + '</span>' +
+        '<span class="plus" aria-hidden="true"><span></span><span class="v"></span></span></button>' +
+        '<div class="step-body" id="step-b' + i + '"' + (open ? '' : ' hidden') + '><p>' + esc(s[1]) + '</p></div></div>'
+    }).join('')
+  }
+
+  function renderAchievements() {
+    $('ach-list').innerHTML = t().achievements.items.map(function (a) {
+      return '<li class="ach"><b>' + esc(a.num) + '</b><span>' + esc(a.text) + '</span></li>'
+    }).join('')
+  }
+
+  function renderTeachers() {
+    var c = t().teachers
+    $('teacher-list').innerHTML = c.items.map(function (tc, i) {
+      var photo = D.TEACHER_PHOTOS[i]
+      var pic = photo
+        ? '<img src="' + esc(photo) + '" alt="' + esc(tc.name) + '" loading="lazy" width="400" height="400">'
+        : use('i-user')
+      return '<article class="teacher">' +
+        '<div class="teacher-photo' + (photo ? '' : ' is-empty') + '">' + pic + '</div>' +
+        '<div class="teacher-body"><h3>' + esc(tc.name) + '</h3><p class="teacher-role">' + esc(tc.role) + '</p>' +
+        '<p class="teacher-text">' + esc(tc.text) + '</p>' +
+        '<ul class="tags">' + tc.tags.map(function (g) { return '<li>' + esc(g) + '</li>' }).join('') + '</ul></div></article>'
+    }).join('')
+  }
+
+  function renderReviews() {
+    $('review-list').innerHTML = t().reviews.items.map(function (r) {
+      return '<figure class="rev">' + use('i-quote', 'rev-q') +
+        '<blockquote>' + esc(r.quote) + '</blockquote>' +
+        '<figcaption><span class="rev-ava" aria-hidden="true">' + esc(r.name.replace(/[^\p{L}]/gu, '').charAt(0) || '•') + '</span>' +
+        '<span><strong>' + esc(r.name) + '</strong><small>' + esc(r.role) + '</small></span></figcaption></figure>'
     }).join('')
   }
 
   function renderPricing() {
     var c = t()
-    var prices = D.PRICES[state.pkg]
-    $('pkg-chips').innerHTML = D.PACKAGES.map(function (n) {
-      var on = n === state.pkg
-      return '<button type="button" class="chip' + (on ? ' on' : '') + '" data-pkg="' + n +
-        '" aria-pressed="' + on + '">' + esc(c.price.counts[n]) + '</button>'
+    var fmt = FORMATS.filter(function (f) { return f.id === state.fmt })[0]
+    $('fmt-chips').innerHTML = FORMATS.map(function (f) {
+      var on = f.id === state.fmt
+      return '<button type="button" class="chip' + (on ? ' on' : '') + '" data-fmt="' + f.id +
+        '" aria-pressed="' + on + '">' + esc(c.price.names[f.id]) + '</button>'
     }).join('')
-    $('pkg-note').textContent = c.price.notes[state.pkg]
-    $('tiles').innerHTML = PLANS.map(function (p) {
-      return '<div class="tile' + (p.featured ? ' tile-featured' : '') + '">' + icon(p.icon, p.tone) +
-        '<h3>' + esc(c.price.names[p.id]) + '</h3>' +
-        '<p class="price">' + esc(prices[p.id][0]) + '</p>' +
-        '<p class="rate">' + esc(prices[p.id][1]) + ' ' + esc(c.price[p.perKey]) + '</p>' +
-        '<ul>' + c.price.lines[p.id].map(function (ln) { return '<li>' + esc(ln) + '</li>' }).join('') + '</ul>' +
-        '<a class="tile-cta" href="#book">' + esc(c.price.choose) + ARROW + '</a></div>'
+    $('fmt-lines').innerHTML = c.price.lines[fmt.id].map(function (ln) { return '<li>' + esc(ln) + '</li>' }).join('')
+
+    var base = num(D.PRICES[D.PACKAGES[0]][fmt.id][1])
+    var last = D.PACKAGES.length - 1
+    $('pkgs').innerHTML = D.PACKAGES.map(function (n, i) {
+      var p = D.PRICES[n][fmt.id]
+      var save = (base - num(p[1])) * n
+      return '<div class="pkg pkg-' + i + (i === last ? ' pkg-top' : '') + '">' +
+        '<p class="pkg-count">' + esc(c.price.counts[n]) + '</p>' +
+        '<p class="price">' + esc(p[0]) + '</p>' +
+        '<p class="rate">' + esc(p[1]) + ' ' + esc(c.price[fmt.perKey]) + '</p>' +
+        '<p class="pkg-valid">' + esc(c.price.notes[n]) + '</p>' +
+        (save > 0 ? '<p class="pkg-save">' + esc(c.price.save) + ' ' + money(save) + '</p>' : '') +
+        '<a class="tile-cta" href="#book" data-pick="' + n + '">' + esc(c.price.choose) + ARROW + '</a></div>'
     }).join('')
   }
 
@@ -145,9 +187,13 @@
   function renderAll() {
     applyText()
     renderMarquee()
+    renderPhotos()
     renderGoalChips()
-    renderPhrases()
+    renderFits()
     renderSteps()
+    renderAchievements()
+    renderTeachers()
+    renderReviews()
     renderPricing()
     renderFaq()
     renderFormOptions()
@@ -172,7 +218,7 @@
 
   /* ---------- Events ---------- */
   document.addEventListener('click', function (e) {
-    var el = e.target.closest('[data-lang],[data-goal],[data-step],[data-pkg]')
+    var el = e.target.closest('[data-lang],[data-goal],[data-step],[data-fmt],[data-pick]')
     if (!el) return
     if (el.hasAttribute('data-lang')) {
       var lang = el.getAttribute('data-lang')
@@ -184,13 +230,20 @@
     } else if (el.hasAttribute('data-goal')) {
       state.goal = el.getAttribute('data-goal')
       renderGoalChips()
-      renderPhrases()
+      renderFits()
     } else if (el.hasAttribute('data-step')) {
       state.step = Number(el.getAttribute('data-step'))
       renderSteps()
-    } else if (el.hasAttribute('data-pkg')) {
-      state.pkg = Number(el.getAttribute('data-pkg'))
+      var head = document.querySelector('[data-step="' + state.step + '"]')
+      if (head) head.focus()
+    } else if (el.hasAttribute('data-fmt')) {
+      state.fmt = el.getAttribute('data-fmt')
       renderPricing()
+    } else if (el.hasAttribute('data-pick')) {
+      // Carry the chosen package and format into the booking form
+      var idx = FORMATS.map(function (f) { return f.id }).indexOf(state.fmt)
+      $('f-format').selectedIndex = idx
+      $('f-package').value = t().price.counts[el.getAttribute('data-pick')] + ' · ' + t().price.names[state.fmt]
     }
   })
 
@@ -215,6 +268,7 @@
   })
 
   // Highlight the menu link of the section in view
+  var SPY = ['about', 'teachers', 'prices', 'reviews', 'faq']
   if ('IntersectionObserver' in window) {
     var links = document.querySelectorAll('.nav-links a')
     var spy = new IntersectionObserver(function (entries) {
@@ -223,7 +277,18 @@
         links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id) })
       })
     }, { rootMargin: '-45% 0px -50% 0px' })
-    ;['how', 'about', 'prices', 'faq'].forEach(function (id) { if ($(id)) spy.observe($(id)) })
+    SPY.forEach(function (id) { if ($(id)) spy.observe($(id)) })
+  }
+
+  // Mobile sticky button: hide it while the hero or the booking form is on screen
+  var cta = document.querySelector('.mobile-cta')
+  if (cta && 'IntersectionObserver' in window) {
+    var seen = {}
+    var ctaIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting })
+      cta.classList.toggle('is-hidden', !!(seen.top || seen.book))
+    })
+    ;['top', 'book'].forEach(function (id) { if ($(id)) ctaIo.observe($(id)) })
   }
 
   $('year').textContent = new Date().getFullYear()
