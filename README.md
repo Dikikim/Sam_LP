@@ -1,6 +1,6 @@
-# English with Sam — landing page
+# We Speak — landing page
 
-One-page bilingual (UA/EN) site for Sam's online English lessons.
+One-page bilingual (UA/EN) site for the We Speak online English school.
 Plain HTML, CSS and JavaScript: **no build step, nothing to install**.
 
 ## Open it
@@ -17,12 +17,12 @@ Plain HTML, CSS and JavaScript: **no build step, nothing to install**.
 | Colours, layout, animation, mobile styles | `assets/css/styles.css` |
 | Interactive parts (language, goals, steps, prices, form) | `assets/js/app.js` |
 | Photos | `assets/img/` (`sam.webp` + `sam.png` fallback) |
-| Small "About" photos, teacher photos | `PHOTOS` and `TEACHER_PHOTOS` in `assets/js/content.js` (put files in `assets/img/photos/`; `null` = empty frame) |
+| Teacher photos | `TEACHER_PHOTOS` in `assets/js/content.js` (put files in `assets/img/photos/`; `null` = empty frame) |
 | Achievements, teachers, reviews | `achievements`, `teachers`, `reviews` in `assets/js/content.js` |
 
 ## Colours and fonts
 
-- One main colour (green `--accent`) + two accents (`--peach`, `--butter`), set at the top of `styles.css`.
+- Main colour peach (`--accent`), accent mint (`--mint`), second accent `--butter`, set at the top of `styles.css`.
 - Two font variants: **A** Unbounded + Manrope (default, like SpeakEasy) and **B** Oswald + Open Sans (like SkorykEd).
   Open the page with `?font=b` to see B. To make B the default, change `var v = 'a'` to `'b'` in the `<head>` script of `index.html`.
 

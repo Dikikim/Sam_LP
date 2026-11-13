@@ -1,4 +1,4 @@
-/* English with Sam: page behaviour. Plain JS, no build step. */
+/* We Speak: page behaviour. Plain JS, no build step. */
 (function () {
   'use strict'
 
@@ -74,16 +74,6 @@
     // Two identical halves, so sliding by -50% loops without a jump
     $('marquee').innerHTML = '<div class="mq-half">' + one + one + '</div><div class="mq-half" aria-hidden="true">' + one + one + '</div>'
     $('marquee-sr').textContent = items.join(', ')
-  }
-
-  function renderPhotos() {
-    var c = t().about
-    $('photos').innerHTML = D.PHOTOS.map(function (p, i) {
-      var inner = p
-        ? '<img src="' + esc(p) + '" alt="' + esc(c.photoAlt) + '" loading="lazy" width="320" height="400">'
-        : use('i-camera') + '<span>' + esc(c.photoEmpty) + '</span>'
-      return '<figure class="snap snap-' + (i % 6) + (p ? '' : ' snap-empty') + '">' + inner + '</figure>'
-    }).join('')
   }
 
   function renderGoalChips() {
@@ -187,7 +177,6 @@
   function renderAll() {
     applyText()
     renderMarquee()
-    renderPhotos()
     renderGoalChips()
     renderFits()
     renderSteps()
@@ -268,7 +257,7 @@
   })
 
   // Highlight the menu link of the section in view
-  var SPY = ['about', 'teachers', 'prices', 'reviews', 'faq']
+  var SPY = ['teachers', 'prices', 'reviews', 'faq']
   if ('IntersectionObserver' in window) {
     var links = document.querySelectorAll('.nav-links a')
     var spy = new IntersectionObserver(function (entries) {

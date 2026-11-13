@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>English with Sam — розмовна американська англійська онлайн</title>
+  <title>We Speak — розмовна американська англійська онлайн</title>
   <meta name="description" content="Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Перше заняття — безкоштовно.">
-  <meta name="theme-color" content="#3a7d5c">
+  <meta name="theme-color" content="#f6ba93">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="English with Sam">
+  <meta property="og:title" content="We Speak">
   <meta property="og:description" content="Розмовна американська англійська онлайн. 70% заняття говориш ти. Перше заняття — безкоштовно.">
   <meta property="og:image" content="https://sviatenglish.netlify.app/assets/img/og.jpg">
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
@@ -27,13 +27,12 @@
     })()
   </script>
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600&display=swap"></noscript>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=2">
 </head>
 <body>
 <!-- Icon set (stroke icons, one weight) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
-  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6H8l1.5-2h5L16 6h1.5A2.5 2.5 0 0 1 20 8.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5z"/><circle cx="12" cy="13" r="3.5"/></symbol>
   <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
   <symbol id="i-quote" viewBox="0 0 24 24"><path d="M10 7H6a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v1a3 3 0 0 1-3 3M20 7h-4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v1a3 3 0 0 1-3 3"/></symbol>
   <symbol id="i-telegram" viewBox="0 0 24 24"><path d="M15 10l-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></symbol>
@@ -48,9 +47,8 @@
 
   <!-- NAV -->
   <header class="nav wrap rise">
-    <a href="#top" class="wordmark"><span class="dot" aria-hidden="true"></span>english with sam</a>
+    <a href="#top" class="wordmark"><span class="dot" aria-hidden="true"></span>we speak</a>
     <nav aria-label="Main" class="nav-links">
-      <a href="#about" data-i18n="nav.about">Про Сема</a>
       <a href="#teachers" data-i18n="nav.teachers">Викладачі</a>
       <a href="#prices" data-i18n="nav.prices">Ціни</a>
       <a href="#reviews" data-i18n="nav.reviews">Відгуки</a>
@@ -69,20 +67,22 @@
     <!-- HERO -->
     <section id="top" class="hero">
       <div class="hero-shape">
-        <picture class="hero-person">
-          <source srcset="assets/img/sam.webp" type="image/webp">
-          <img src="assets/img/sam.png" alt="Сем, викладач англійської" width="1400" height="1378" fetchpriority="high">
-        </picture>
+        <div class="hero-blob">
+          <picture class="hero-person">
+            <source srcset="assets/img/sam.webp" type="image/webp">
+            <img src="assets/img/sam.png" alt="Викладач школи We Speak" width="1400" height="1378" fetchpriority="high">
+          </picture>
+        </div>
         <div class="badge"><b>70%</b><span data-i18n="cards.talkText">часу на занятті говориш ти</span></div>
         <div class="badge badge-trial"><b data-i18n="cards.trialTitle">Пробне — безкоштовно</b><span data-i18n="cards.trialText">знайомимось і визначаємо рівень</span></div>
       </div>
       <div class="wrap hero-inner">
         <div class="hero-text">
-          <h1 class="rise d1"><span data-i18n="heads.hero.0">Говори англійською</span> <span class="hl" data-i18n="heads.hero.1">вільно з Семом</span></h1>
+          <h1 class="rise d1"><span data-i18n="heads.hero.0">Говори англійською</span> <span class="hl" data-i18n="heads.hero.1">вільно з&nbsp;We&nbsp;Speak</span></h1>
           <p class="lead rise d2" data-i18n="hero.lead">Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти.</p>
           <div class="hero-actions rise d3">
             <a class="btn" href="#book"><span data-i18n="hero.cta">Записатися на безкоштовне пробне</span> <span class="arr" aria-hidden="true">→</span></a>
-            <a class="text-link" href="#about" data-i18n="hero.second">Дізнатися більше</a>
+            <a class="text-link" href="#teachers" data-i18n="hero.second">Дізнатися більше</a>
           </div>
         </div>
       </div>
@@ -117,27 +117,6 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="sec sec-about" aria-labelledby="about-h">
-      <div class="about-panel on-dark reveal">
-        <div class="split">
-          <h2 id="about-h" class="h2 about-h"><span data-i18n="heads.about.0">Привіт, я Сем.</span> <span class="hl" data-i18n="heads.about.1">Давай говорити.</span></h2>
-          <div class="about-text">
-            <div>
-              <h3 data-i18n="about.whoH">Хто я</h3>
-              <p data-i18n="about.who">Викладач розмовної американської англійської.</p>
-            </div>
-            <div>
-              <h3 data-i18n="about.howH">Як я навчаю</h3>
-              <p data-i18n="about.how">Говоримо про твою роботу, подорожі, твій тиждень.</p>
-            </div>
-            <div><a class="btn" href="#book"><span data-i18n="about.cta">Познайомимось на пробному</span> <span class="arr" aria-hidden="true">→</span></a></div>
-          </div>
-        </div>
-        <div class="photos" id="photos" role="group" aria-label="Фото Сема" data-i18n-aria="about.photosLabel"></div>
-      </div>
-    </section>
-
     <!-- ACHIEVEMENTS -->
     <section id="achievements" class="sec" aria-labelledby="ach-h">
       <div class="wrap">
@@ -164,7 +143,7 @@
     <section id="reviews" class="sec" aria-labelledby="reviews-h">
       <div class="wrap">
         <div class="split sec-head reveal">
-          <h2 id="reviews-h" class="h2 col-left"><span data-i18n="heads.reviews.0">Що кажуть</span> <span class="hl" data-i18n="heads.reviews.1">студенти</span></h2>
+          <h2 id="reviews-h" class="h2 col-left"><span data-i18n="heads.reviews.0">Відгуки</span> <span class="hl" data-i18n="heads.reviews.1">студентів</span></h2>
           <p class="body col-right" data-i18n="reviews.lead"></p>
         </div>
         <div class="reviews reveal" id="review-list"></div>
@@ -187,7 +166,7 @@
     <!-- FAQ -->
     <section id="faq" class="sec" aria-labelledby="faq-h">
       <div class="wrap split faq-grid">
-        <h2 id="faq-h" class="h2 faq-h"><span data-i18n="heads.faq.0">Чесні</span> <span class="hl" data-i18n="heads.faq.1">питання</span></h2>
+        <h2 id="faq-h" class="h2 faq-h"><span data-i18n="heads.faq.0">Питання</span> <span class="hl" data-i18n="heads.faq.1">про школу</span></h2>
         <div class="faq-list" id="faq-list"></div>
       </div>
     </section>
@@ -229,20 +208,14 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="wrap">
-      <div class="blocks reveal" role="img" aria-label="English with Sam">
-        <div class="blk" style="height:100%">s</div>
-        <div class="blk blk-dark" style="height:74%">a</div>
-        <div class="blk blk-peach" style="height:88%">m</div>
-      </div>
       <nav aria-label="Footer" class="foot-nav">
-        <a href="#about" data-i18n="nav.about">Про Сема</a>
         <a href="#teachers" data-i18n="nav.teachers">Викладачі</a>
         <a href="#prices" data-i18n="nav.prices">Ціни</a>
         <a href="#reviews" data-i18n="nav.reviews">Відгуки</a>
         <a href="#faq" data-i18n="nav.faq">Питання</a>
       </nav>
       <div class="foot-bottom">
-        <span class="copy">© <span id="year">2026</span> English with Sam</span>
+        <span class="copy">© <span id="year">2026</span> We Speak</span>
         <ul class="socials" aria-label="Ми в соцмережах" data-i18n-aria="foot.social">
           <li><a class="soc soc-fill" href="https://t.me/english_sam7" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg aria-hidden="true"><use href="#i-telegram"/></svg></a></li>
           <li><a class="soc" href="https://www.instagram.com/english_with_sam7/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
@@ -258,7 +231,7 @@
   <a class="btn mobile-cta" href="#book"><span data-i18n="mobileCta">Безкоштовне пробне заняття</span> <span class="arr" aria-hidden="true">→</span></a>
 </div>
 
-<script src="assets/js/content.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/content.js?v=2"></script>
+<script src="assets/js/app.js?v=2"></script>
 </body>
 </html>

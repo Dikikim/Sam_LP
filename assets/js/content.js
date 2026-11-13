@@ -1,4 +1,4 @@
-/* English with Sam: all page text, prices, photos and links. Edit both ua and en. */
+/* We Speak: all page text, prices, photos and links. Edit both ua and en. */
 (function () {
 
 const LINKS = {
@@ -9,18 +9,9 @@ const LINKS = {
   facebook: 'https://www.facebook.com/share/1JaHwCmzrp/',
 }
 
-// Small personal photos in the "About" collage (any size; they are cropped to 4:5).
-// Put files in assets/img/photos/ and list them here. null = empty frame.
-const PHOTOS = [
-  'assets/img/sam.webp',
-  null,
-  null,
-  null,
-  null,
-]
-
 // Teacher card photos, same order as COPY.*.teachers.items. null = placeholder.
-const TEACHER_PHOTOS = ['assets/img/sam.webp', null, null]
+// Put files in assets/img/photos/ and list them here.
+const TEACHER_PHOTOS = [null, null]
 
 // [package total, price per lesson]
 const PRICES = {
@@ -35,19 +26,18 @@ const GOAL_IDS = ['work', 'travel', 'exams', 'life']
 const COPY = {
   ua: {
     meta: {
-      title: 'English with Sam — розмовна американська англійська онлайн',
+      title: 'We Speak — розмовна американська англійська онлайн',
       description: 'Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти. Перше заняття — безкоштовно.',
     },
-    nav: { about: 'Про Сема', teachers: 'Викладачі', prices: 'Ціни', reviews: 'Відгуки', faq: 'Питання', cta: 'Безкоштовне пробне' },
+    nav: { teachers: 'Викладачі', prices: 'Ціни', reviews: 'Відгуки', faq: 'Питання', cta: 'Безкоштовне пробне' },
     heads: {
-      hero: ['Говори англійською', 'вільно з Семом'],
+      hero: ['Говори англійською', 'вільно з We Speak'],
       goal: ['Для чого тобі', 'англійська?'],
-      about: ['Привіт, я Сем.', 'Давай говорити.'],
       achievements: ['Мої', 'досягнення'],
       teachers: ['Наші', 'викладачі'],
-      reviews: ['Що кажуть', 'студенти'],
+      reviews: ['Відгуки', 'студентів'],
       price: ['Обери свій', 'темп'],
-      faq: ['Чесні', 'питання'],
+      faq: ['Питання', 'про школу'],
     },
     hero: {
       lead: 'Розмовна американська англійська без барʼєрів — онлайн, для дорослих і підлітків. 70% кожного заняття говориш ти.',
@@ -87,16 +77,6 @@ const COPY = {
         ['Перевірка', 'Кожні кілька місяців порівнюємо, де ти зараз і з чого починав, і коригуємо план.'],
       ],
     },
-    about: {
-      whoH: 'Хто я',
-      who: 'Викладач розмовної американської англійської. Допомагаю тим, хто розуміє англійську, але завмирає, коли треба говорити, нарешті заговорити без страху помилок.',
-      howH: 'Як я навчаю',
-      how: 'Говоримо про твою роботу, подорожі, твій тиждень. Я занотовую помилки, які мають значення, і ми виправляємо їх на наступному занятті, в тому ж контексті.',
-      cta: 'Познайомимось на пробному',
-      photosLabel: 'Фото Сема',
-      photoAlt: 'Сем',
-      photoEmpty: 'тут буде фото',
-    },
     achievements: {
       lead: '[Коротко: чим ти пишаєшся як викладач — одне речення.]',
       items: [
@@ -109,7 +89,6 @@ const COPY = {
     teachers: {
       lead: 'Усі викладачі працюють за одним підходом: з першого заняття говориш ти, а граматику будуємо навколо твоїх ситуацій.',
       items: [
-        { name: 'Сем', role: 'Розмовна американська англійська', text: 'Допомагає заговорити без страху помилок: робота, подорожі, щоденне життя.', tags: ['Індивідуальні', 'Парні', '[рівні]'] },
         { name: '[Імʼя викладача]', role: '[спеціалізація]', text: '[Два речення про досвід і підхід викладача.]', tags: ['[формати]', '[рівні]'] },
         { name: '[Імʼя викладача]', role: '[спеціалізація, напр. IELTS чи НМТ]', text: '[Два речення про досвід і підхід викладача.]', tags: ['[формати]', '[рівні]'] },
       ],
@@ -172,19 +151,18 @@ const COPY = {
   },
   en: {
     meta: {
-      title: 'English with Sam — conversational American English online',
+      title: 'We Speak — conversational American English online',
       description: 'Conversational American English without the barrier, online for adults and teens. 70% of every lesson is you speaking. Your first lesson is free.',
     },
-    nav: { about: 'About Sam', teachers: 'Teachers', prices: 'Prices', reviews: 'Reviews', faq: 'Questions', cta: 'Free trial' },
+    nav: { teachers: 'Teachers', prices: 'Prices', reviews: 'Reviews', faq: 'Questions', cta: 'Free trial' },
     heads: {
-      hero: ['Speak English', 'freely with Sam'],
+      hero: ['Speak English', 'freely with We Speak'],
       goal: ['What do you need', 'English for?'],
-      about: ["Hi, I'm Sam.", "Let's talk."],
       achievements: ['What I have', 'achieved'],
       teachers: ['Our', 'teachers'],
-      reviews: ['What students', 'say'],
+      reviews: ['Student', 'reviews'],
       price: ['Pick your', 'pace'],
-      faq: ['Fair', 'questions'],
+      faq: ['Questions about', 'the school'],
     },
     hero: {
       lead: 'Conversational American English without the barrier, online for adults and teens. 70% of every lesson is you speaking.',
@@ -224,16 +202,6 @@ const COPY = {
         ['Check-in', 'Every few months we compare where you are with where you started, and adjust the plan.'],
       ],
     },
-    about: {
-      whoH: 'Who I am',
-      who: 'A teacher of conversational American English. I help people who understand English but freeze when it is time to speak finally start talking, without the fear of mistakes.',
-      howH: 'How I teach',
-      how: 'We talk about your work, your trips, your week. I note the mistakes that matter, and we fix them in the next lesson, in the context you made them in.',
-      cta: 'Meet me on a trial lesson',
-      photosLabel: 'Photos of Sam',
-      photoAlt: 'Sam',
-      photoEmpty: 'photo coming soon',
-    },
     achievements: {
       lead: '[In one sentence: what you are proud of as a teacher.]',
       items: [
@@ -246,7 +214,6 @@ const COPY = {
     teachers: {
       lead: 'Every teacher works the same way: you speak from the first lesson, and grammar is built around your real situations.',
       items: [
-        { name: 'Sam', role: 'Conversational American English', text: 'Helps you start speaking without the fear of mistakes: work, travel, everyday life.', tags: ['One-to-one', 'Pairs', '[levels]'] },
         { name: '[Teacher name]', role: '[speciality]', text: "[Two sentences about the teacher's experience and approach.]", tags: ['[formats]', '[levels]'] },
         { name: '[Teacher name]', role: '[speciality, e.g. IELTS or НМТ]', text: "[Two sentences about the teacher's experience and approach.]", tags: ['[formats]', '[levels]'] },
       ],
@@ -309,5 +276,5 @@ const COPY = {
   },
 }
 
-window.EWS = { LINKS, PHOTOS, TEACHER_PHOTOS, PRICES, PACKAGES, GOAL_IDS, COPY }
+window.EWS = { LINKS, TEACHER_PHOTOS, PRICES, PACKAGES, GOAL_IDS, COPY }
 })()
