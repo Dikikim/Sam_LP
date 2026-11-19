@@ -5,14 +5,10 @@
   var D = window.EWS
   var COPY = D.COPY
 
-  // Lesson formats, in the same order as the booking form options
-  var FORMATS = [
-    { id: 'solo', perKey: 'perLesson' },
-    { id: 'pair', perKey: 'perPerson' },
-    { id: 'exam', perKey: 'perLesson' },
-  ]
+  // Lesson formats and packages live in content.js, in the same order as the booking form options
+  var FORMATS = D.FORMATS
 
-  var state = { lang: initialLang(), goal: 'work', step: 0, fmt: 'solo' }
+  var state = { lang: initialLang(), goal: 'work', fmt: 'solo' }
 
   function $(id) { return document.getElementById(id) }
   function t() { return COPY[state.lang] }
@@ -27,7 +23,8 @@
   function use(id, cls) {
     return '<svg class="' + (cls || 'i') + '" aria-hidden="true"><use href="#' + id + '"/></svg>'
   }
-  function num(s) { return Number(String(s).replace(/\D/g, '')) }
+  // escape, then turn **text** into bold
+  function rich(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>') }
   function money(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₴' }
   var ARROW = ' <span class="arr" aria-hidden="true">→</span>'
 
@@ -93,20 +90,80 @@
     $('goal-focus').textContent = c.goal.focus[state.goal]
   }
 
+  // "How it works": puzzle pieces zig-zag left/right, a dashed route links the pins in their notches
   function renderSteps() {
-    $('steps').innerHTML = t().steps.items.map(function (s, i) {
-      var open = i === state.step
-      return '<div class="step step-' + i + (open ? ' open' : '') + '">' +
-        '<button type="button" class="step-head" data-step="' + i + '" aria-expanded="' + open + '" aria-controls="step-b' + i + '">' +
-        '<span class="step-num">0' + (i + 1) + '</span><span class="step-title">' + esc(s[0]) + '</span>' +
-        '<span class="plus" aria-hidden="true"><span></span><span class="v"></span></span></button>' +
-        '<div class="step-body" id="step-b' + i + '"' + (open ? '' : ' hidden') + '><p>' + esc(s[1]) + '</p></div></div>'
-    }).join('')
+    var s = t().steps
+    var last = s.items.length - 1
+    $('route').innerHTML = '<svg class="route-line" aria-hidden="true"><path/></svg><ol class="pieces">' +
+      s.items.map(function (txt, i) {
+        var side = i % 2 ? 'piece-r' : 'piece-l'
+        var tone = (i % 4 === 0 || i % 4 === 3) ? ' piece-fill' : ''
+        return '<li class="piece ' + side + tone + '">' +
+          '<span class="pin" aria-hidden="true">' + (i + 1) + '</span>' +
+          use('i-spark', 'spark') + '<p class="piece-text">' + esc(txt) + '</p>' +
+          (i === 0 ? '<span class="sticker sticker-start">' + esc(s.start) + '</span>' : '') +
+          (i === last ? '<span class="sticker sticker-finish">' + esc(s.finish) + '</span>' : '') +
+          '</li>'
+      }).join('') + '</ol>'
+    drawRoute()
   }
 
-  function renderAchievements() {
-    $('ach-list').innerHTML = t().achievements.items.map(function (a) {
-      return '<li class="ach"><b>' + esc(a.num) + '</b><span>' + esc(a.text) + '</span></li>'
+  // Rounded polyline through points [[x, y], ...]
+  function roundedPath(pts, r) {
+    var d = ''
+    function toward(a, b, len) {
+      var dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1
+      return (a[0] + dx / l * len).toFixed(1) + ' ' + (a[1] + dy / l * len).toFixed(1)
+    }
+    for (var i = 1; i < pts.length; i++) {
+      var p = pts[i], prev = pts[i - 1], next = pts[i + 1]
+      if (!next) { d += ' L' + p[0].toFixed(1) + ' ' + p[1].toFixed(1); break }
+      var rr = Math.min(r, Math.hypot(p[0] - prev[0], p[1] - prev[1]) / 2, Math.hypot(next[0] - p[0], next[1] - p[1]) / 2)
+      d += ' L' + toward(p, prev, rr) + ' Q' + p[0].toFixed(1) + ' ' + p[1].toFixed(1) + ' ' + toward(p, next, rr)
+    }
+    return d
+  }
+
+  function drawRoute() {
+    var box = $('route')
+    var svg = box && box.querySelector('.route-line')
+    if (!svg) return
+    var b = box.getBoundingClientRect()
+    var pins = [].map.call(box.querySelectorAll('.pin'), function (pin) {
+      var r = pin.getBoundingClientRect(), li = pin.parentNode.getBoundingClientRect()
+      return {
+        x: r.left + r.width / 2 - b.left, y: r.top + r.height / 2 - b.top,
+        l: li.left - b.left, r: li.right - b.left, t: li.top - b.top, bot: li.bottom - b.top,
+      }
+    })
+    var d = ''
+    pins.forEach(function (Q, i) {
+      if (!i) { d = 'M' + Q.x.toFixed(1) + ' ' + Q.y.toFixed(1); return }
+      var A = pins[i - 1]
+      if (A.r <= Q.l || Q.r <= A.l) {
+        // pieces side by side (desktop): S-curve through the gap between them
+        var k = (Q.x - A.x) * 0.6
+        d += ' C' + (A.x + k).toFixed(1) + ' ' + A.y.toFixed(1) + ' ' + (Q.x - k).toFixed(1) + ' ' + Q.y.toFixed(1) + ' ' + Q.x.toFixed(1) + ' ' + Q.y.toFixed(1)
+      } else {
+        // pieces stacked (mobile): out to the free side, down, across the gap, into the next notch
+        var pinOnRight = A.x > (A.l + A.r) / 2
+        var xs = pinOnRight ? (A.r + b.width) / 2 : A.l / 2
+        var yg = (A.bot + Q.t) / 2
+        d += roundedPath([[A.x, A.y], [xs, A.y], [xs, yg], [Q.x, yg], [Q.x, Q.y]], 18)
+      }
+    })
+    svg.setAttribute('viewBox', '0 0 ' + b.width.toFixed(1) + ' ' + b.height.toFixed(1))
+    svg.querySelector('path').setAttribute('d', d)
+  }
+
+  function renderFounder() {
+    var f = t().founder
+    $('f-intro').innerHTML = rich(f.intro)
+    $('f-facts').innerHTML = f.facts.map(function (x) {
+      return '<li>' + use('i-spark', 'spark') + '<span>' + rich(x) + '</span></li>'
+    }).join('')
+    $('f-stats').innerHTML = f.stats.map(function (s) {
+      return '<li><b><span>' + esc(s.num) + '</span></b><span>' + esc(s.text) + '</span></li>'
     }).join('')
   }
 
@@ -135,27 +192,36 @@
   }
 
   function renderPricing() {
-    var c = t()
+    var p = t().price
     var fmt = FORMATS.filter(function (f) { return f.id === state.fmt })[0]
     $('fmt-chips').innerHTML = FORMATS.map(function (f) {
       var on = f.id === state.fmt
       return '<button type="button" class="chip' + (on ? ' on' : '') + '" data-fmt="' + f.id +
-        '" aria-pressed="' + on + '">' + esc(c.price.names[f.id]) + '</button>'
+        '" aria-pressed="' + on + '">' + esc(p.names[f.id]) + '</button>'
     }).join('')
-    $('fmt-lines').innerHTML = c.price.lines[fmt.id].map(function (ln) { return '<li>' + esc(ln) + '</li>' }).join('')
+    $('fmt-lines').innerHTML = p.lines[fmt.id].map(function (ln) { return '<li>' + esc(ln) + '</li>' }).join('')
 
-    var base = num(D.PRICES[D.PACKAGES[0]][fmt.id][1])
-    var last = D.PACKAGES.length - 1
-    $('pkgs').innerHTML = D.PACKAGES.map(function (n, i) {
-      var p = D.PRICES[n][fmt.id]
-      var save = (base - num(p[1])) * n
-      return '<div class="pkg pkg-' + i + (i === last ? ' pkg-top' : '') + '">' +
-        '<p class="pkg-count">' + esc(c.price.counts[n]) + '</p>' +
-        '<p class="price">' + esc(p[0]) + '</p>' +
-        '<p class="rate">' + esc(p[1]) + ' ' + esc(c.price[fmt.perKey]) + '</p>' +
-        '<p class="pkg-valid">' + esc(c.price.notes[n]) + '</p>' +
-        (save > 0 ? '<p class="pkg-save">' + esc(c.price.save) + ' ' + money(save) + '</p>' : '') +
-        '<a class="tile-cta" href="#book" data-pick="' + n + '">' + esc(c.price.choose) + ARROW + '</a></div>'
+    // Packages rise like a staircase: the bigger the package, the taller the tile
+    var packs = fmt.packs, n = packs.length, base = packs[0][1]
+    var TONES = ['pkg-top', 'pkg-mint', 'pkg-butter'] // from the biggest package down
+    var box = $('pkgs')
+    box.style.setProperty('--n', n)
+    box.setAttribute('data-n', n)
+    box.innerHTML = packs.map(function (pk, i) {
+      var count = pk[0], per = pk[1]
+      var save = (base - per) * count
+      var pct = Math.round(save / (base * count) * 100)
+      var step = n > 1 ? i / (n - 1) : 1
+      var best = count === fmt.best
+      return '<div class="pkg ' + (TONES[n - 1 - i] || '') + (best ? ' pkg-best' : '') +
+        '" style="--h:' + Math.round(350 + 225 * step) + 'px;--mr:' + (18 * (1 - step)).toFixed(1) + '%">' +
+        (best ? '<p class="pkg-tag">' + esc(p.best) + '</p>' : '') +
+        '<p class="pkg-count">' + esc(p.lessons(count)) + '</p>' +
+        '<p class="price">' + money(count * per) + '</p>' +
+        '<p class="rate">' + money(per) + ' ' + esc(p[fmt.perKey]) + '</p>' +
+        '<p class="pkg-valid">' + esc(pk[2] + ' ' + p.week + ' · ' + p.valid.replace('#', pk[3])) + '</p>' +
+        (save > 0 ? '<p class="pkg-save">' + esc(p.save) + ' ' + money(save) + ' (' + pct + '%)</p>' : '') +
+        '<a class="tile-cta" href="#book" data-pick="' + count + '">' + esc(p.choose) + ARROW + '</a></div>'
     }).join('')
   }
 
@@ -180,7 +246,7 @@
     renderGoalChips()
     renderFits()
     renderSteps()
-    renderAchievements()
+    renderFounder()
     renderTeachers()
     renderReviews()
     renderPricing()
@@ -207,7 +273,7 @@
 
   /* ---------- Events ---------- */
   document.addEventListener('click', function (e) {
-    var el = e.target.closest('[data-lang],[data-goal],[data-step],[data-fmt],[data-pick]')
+    var el = e.target.closest('[data-lang],[data-goal],[data-fmt],[data-pick]')
     if (!el) return
     if (el.hasAttribute('data-lang')) {
       var lang = el.getAttribute('data-lang')
@@ -220,11 +286,6 @@
       state.goal = el.getAttribute('data-goal')
       renderGoalChips()
       renderFits()
-    } else if (el.hasAttribute('data-step')) {
-      state.step = Number(el.getAttribute('data-step'))
-      renderSteps()
-      var head = document.querySelector('[data-step="' + state.step + '"]')
-      if (head) head.focus()
     } else if (el.hasAttribute('data-fmt')) {
       state.fmt = el.getAttribute('data-fmt')
       renderPricing()
@@ -232,9 +293,13 @@
       // Carry the chosen package and format into the booking form
       var idx = FORMATS.map(function (f) { return f.id }).indexOf(state.fmt)
       $('f-format').selectedIndex = idx
-      $('f-package').value = t().price.counts[el.getAttribute('data-pick')] + ' · ' + t().price.names[state.fmt]
+      $('f-package').value = t().price.lessons(Number(el.getAttribute('data-pick'))) + ' · ' + t().price.names[state.fmt]
     }
   })
+
+  // Redraw the route whenever its box changes size (resize, fonts loading, language switch)
+  if ('ResizeObserver' in window) new ResizeObserver(drawRoute).observe($('route'))
+  else window.addEventListener('resize', drawRoute)
 
   // Booking form: Netlify Forms collects it when the site is on Netlify.
   $('book-form').addEventListener('submit', function (e) {
