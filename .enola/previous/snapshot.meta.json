@@ -1,0 +1,228 @@
+{
+  "repo_path": "D:\\LH page",
+  "repo_label": "sam_lp",
+  "generated_at": "2026-10-25T16:07:12Z",
+  "duration": "3.3083062s",
+  "extractors": [
+    "mdintent"
+  ],
+  "explainers": [
+    "cycles",
+    "layers",
+    "crossrepo",
+    "coverage",
+    "unused-routes",
+    "domain",
+    "query-loops",
+    "dead-methods",
+    "entry-points",
+    "messaging-coverage",
+    "god-class",
+    "hotspots",
+    "dependency-depth",
+    "exported-surface",
+    "complexity-outliers",
+    "intent",
+    "constraints",
+    "vendored-candidates",
+    "import-closure",
+    "package-metrics",
+    "dead-code",
+    "performance"
+  ],
+  "renderers": [
+    "llm_context"
+  ],
+  "file_hashes": [
+    {
+      "path": "assets/js/content.js",
+      "hash": "5535a016915a8daffc455e8d4c106addbecab871d30a20d492f3319c413f2098",
+      "mod_time": "2026-10-25T16:05:01Z"
+    },
+    {
+      "path": "fly.toml",
+      "hash": "80c532433979a42added9ec3a047da6b981296ccdbc7b1017d4891e6ce40c964",
+      "mod_time": "2026-10-15T16:29:35Z"
+    },
+    {
+      "path": "index.html",
+      "hash": "5367d1dba9fb68724d21f89f3f603b44f716d37701e6a85e6d8cc884cd787834",
+      "mod_time": "2026-10-25T15:52:56Z"
+    },
+    {
+      "path": "Photo/Sam.png",
+      "hash": "a6e3486527c44972c8b1d2df433c6bcb097b41b4145be193341db80a0bf16d08",
+      "mod_time": "2026-10-16T14:52:29Z"
+    },
+    {
+      "path": "assets/css/styles.css",
+      "hash": "252bd305f32db0aeec56d5ba61240f66d0f626246099666c53ccaafbf13397d9",
+      "mod_time": "2026-10-25T16:06:05Z"
+    },
+    {
+      "path": "assets/img/color palette/photo_2026-10-25_17-24-05.jpg",
+      "hash": "f1ecdd25606e6f28bcd8d1ca7ea41e7c6c19c997e1d870ea15960b9f748ecb34",
+      "mod_time": "2026-10-25T15:24:05Z"
+    },
+    {
+      "path": "assets/img/color palette/photo_2026-10-25_17-24-10.jpg",
+      "hash": "89391bdc7c0cd8ead123d65c393659d4d88451b81581462463006368569be45b",
+      "mod_time": "2026-10-25T15:24:11Z"
+    },
+    {
+      "path": "assets/img/color palette/photo_2026-10-25_17-24-14.jpg",
+      "hash": "8153c08f693a53599f162885ada0f0162a600af79c2c43e67efe8dfd17ba1af5",
+      "mod_time": "2026-10-25T15:24:14Z"
+    },
+    {
+      "path": "assets/img/favicon.svg",
+      "hash": "d148d79ccd15c2c709dc864f5c36370b53f23d04b8b0af7236d15b3a9498cd03",
+      "mod_time": "2026-10-16T14:59:17Z"
+    },
+    {
+      "path": "assets/img/sam.webp",
+      "hash": "fd1617fc340414ef974df292fa00ceb4934509d03a09d0ca4b44045058509948",
+      "mod_time": "2026-10-16T14:59:15Z"
+    },
+    {
+      "path": ".claudeignore",
+      "hash": "d2b3ff6495078f7e73a70f71d2909bec7b6ee6571229443e52a2be7f94c79043",
+      "mod_time": "2026-10-25T16:04:09Z"
+    },
+    {
+      "path": "assets/img/color palette/photo_2026-10-25_17-24-16.jpg",
+      "hash": "9d108156cf748c591ca9391b077f0ef7eb093f131f0a29fcfaec00cc7d88ed2b",
+      "mod_time": "2026-10-25T15:24:16Z"
+    },
+    {
+      "path": "assets/js/app.js",
+      "hash": "3357f600b0c3cc93298b075b3e104b6f0838842f286b590f536b4a3387280a81",
+      "mod_time": "2026-10-25T16:05:12Z"
+    },
+    {
+      "path": ".claude/CLAUDE.md",
+      "hash": "5e847f7b2203b0e056bb0e2d374063bd82ac50c67dba1f851b28b61f76b47aa4",
+      "mod_time": "2026-10-25T16:04:09Z"
+    },
+    {
+      "path": ".dockerignore",
+      "hash": "c89f0d63f84aba2d3f310ec9d9eeff0ec0b2575a8a52b2b5f7295614e7841e3d",
+      "mod_time": "2026-10-16T15:01:35Z"
+    },
+    {
+      "path": "Dockerfile",
+      "hash": "689655a6c30f9d439dc02abfb11de4d0180c673431be739442832bdec47bc6c2",
+      "mod_time": "2026-10-16T15:01:35Z"
+    },
+    {
+      "path": "README.md",
+      "hash": "795fac0c32078309e56bf16328edafef874a72a39672ee7f0ca2dd33b72c4c90",
+      "mod_time": "2026-10-25T15:56:01Z"
+    },
+    {
+      "path": "assets/img/color palette/photo_2026-10-25_17-24-02.jpg",
+      "hash": "669a5831a2d7d4df98a0340104a21cc4b0eceac8868c6c89fdbe87d19d1f3a97",
+      "mod_time": "2026-10-25T15:24:03Z"
+    },
+    {
+      "path": "assets/img/color palette/photo_2026-10-25_17-24-08.jpg",
+      "hash": "364eee273423e4ef8880cffc500f2866955ba0081a871b1d05b2c4f36deaadfd",
+      "mod_time": "2026-10-25T15:24:08Z"
+    },
+    {
+      "path": "assets/img/color palette/photo_2026-10-25_17-24-12.jpg",
+      "hash": "3793e52a2255e916c82de48964e8312d6f1c4e06aba7fc1fa5563a6c37445335",
+      "mod_time": "2026-10-25T15:24:12Z"
+    },
+    {
+      "path": "netlify.toml",
+      "hash": "d1600ccb646483c256cabc32d187363b02166acada945e5cfe595b1832b4fe0d",
+      "mod_time": "2026-10-16T15:01:34Z"
+    },
+    {
+      "path": ".claude/settings.json",
+      "hash": "d35805c8b210c3bd96a648ee3bf73f4c95c9da37a2152a81322d54a86a86914f",
+      "mod_time": "2026-10-25T16:04:09Z"
+    },
+    {
+      "path": ".gitignore",
+      "hash": "b46c54bf75d79196030be3a2982b6aad3676cf5c68916f0f5f3b3f88aa1a140f",
+      "mod_time": "2026-10-16T15:01:35Z"
+    },
+    {
+      "path": "assets/img/og.jpg",
+      "hash": "7b15e45e2170ff7bdd4c140ddc73dfa693a2cdd9cd99f7ed7376d4d1b46adf95",
+      "mod_time": "2026-10-16T14:59:17Z"
+    },
+    {
+      "path": "assets/img/sam.png",
+      "hash": "4c1d9dba362c66dc70bf3f39cb32a079288ad31c51421f2aea5e37394214c906",
+      "mod_time": "2026-10-16T14:59:16Z"
+    }
+  ],
+  "fact_count": 12,
+  "insight_count": 1,
+  "enola_version": "0.4.21",
+  "snapshot_id": "sha256:14ab05884ca59e0cbb1d1dbf0a876334c50e32e73b5bd8075dad4f0b3630d066",
+  "git": {
+    "ref": "redesign-pastel",
+    "commit": "98a33ed2dbc59e9cdcf4f9684fc52ca4f2baf1af",
+    "dirty": true,
+    "remote": "github.com/dikikim/sam_lp"
+  },
+  "config_hash": "sha256:73d78ea79f51e19979d4c7d00bd9463ae684ebcb909116abad86675323c32c05",
+  "extractor_version": "v270",
+  "files_seen": 25,
+  "files_parsed": 2,
+  "source_bytes": 20009,
+  "dirs_skipped": 1,
+  "skipped_sample": [
+    ".git/ (glob: **/.git/**)"
+  ],
+  "ignore_glob_hash": "sha256:7523cc6397a498e151125a682d28fbf6df20c6f51f6dfaf18fd8f5239a20d2d8",
+  "heuristic_insights": 1,
+  "coverage": {
+    "services_total": 0,
+    "coverage_gaps": 0,
+    "unresolved_edges": 0,
+    "extractors_reporting": 1,
+    "extraction_unresolved": 16
+  },
+  "census": {
+    "files_walked": 25,
+    "parsed": 2,
+    "excluded_by_ignore": 0,
+    "excluded_by_kind": 20,
+    "excluded_kinds": {
+      "(no extension)": 1,
+      ".claudeignore": 1,
+      ".css": 1,
+      ".dockerignore": 1,
+      ".gitignore": 1,
+      ".jpg": 8,
+      ".json": 1,
+      ".png": 2,
+      ".svg": 1,
+      ".toml": 2,
+      ".webp": 1
+    },
+    "skipped_with_cause": 3,
+    "top_skip_causes": [
+      {
+        "cause": "claimed by typescript, which did not run this snapshot",
+        "count": 3
+      }
+    ]
+  },
+  "output_hashes": {
+    "facts.jsonl": "sha256:7d1fc131068db5479912983235733f8f2c389aa9b4934844c36ce920e048d0e0",
+    "insights.json": "sha256:efb3b3dd53b5af10b016afec94fa548ad067c5073d1bc59e882f8971297abcbe",
+    "llm_context.md": "sha256:0f84416ceaae5a5af924817a84f85c7d471d07d118aebfb4f5e710047078300f"
+  },
+  "unseen": {
+    "files_excluded_by_ignore": 0,
+    "dirs_excluded_by_ignore": 1,
+    "dead_exemptions": 0,
+    "dynamic_feature_classes": 0
+  }
+}

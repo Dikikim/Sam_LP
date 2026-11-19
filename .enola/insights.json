@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Additional dead-code candidates: 11 more (see find_orphans)",
+    "source": "dead-code",
+    "description": "0 further high/medium-confidence orphan(s) were omitted from individual insights and 11 low-confidence orphan(s) (methods/types/consts/vars — usage not edge-tracked) were not surfaced individually. Use the find_orphans tool (output_mode=full) for the complete list.",
+    "confidence": 0.4,
+    "evidence": null,
+    "suggested_actions": [
+      "Run find_orphans with confidence=high and visibility=unexported for the safest cleanup set"
+    ]
+  }
+]
